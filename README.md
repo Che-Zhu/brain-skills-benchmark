@@ -28,10 +28,7 @@ Devbox：克隆仓库 → Codex Gateway 跑 /sealos-deploy → 沙箱内 kubectl
 
 ## 能做什么
 
-| 能力 | 说明 |
-|------|------|
-| **跑测** `npm run deploy` | 对单个仓库走上述 Devbox 全流程并落盘指标 |
-| **用例目录** `cases` | 从 skill 仓库同步 eval 元数据（`cases:sync`），支撑批量跑测规划 |
+**跑测** `npm run deploy`：对单个仓库走上述 Devbox 全流程，在本机 `.data/deploy-tasks/` 落盘指标。批量 2000+ 仓的调度尚未实现，需自行包装 `deploy` 或后续加批跑脚本。
 
 ## 与 Brain UI 的关系
 
@@ -40,7 +37,7 @@ Brain UI（用户产品）
         │
         │  同一套 Devbox + Gateway + skill + apply
         ▼
-brain-skills-benchmark（CLI + 本地 task JSON，用于 benchmark）
+本仓库 CLI（`npm run deploy` + 本地 task JSON）
 ```
 
 ## 快速开始
@@ -75,30 +72,18 @@ npm run deploy -- \
 - **Codex**：`CODEX_GATEWAY_OPENAI_API_KEY`（及可选 `CODEX_GATEWAY_OPENAI_BASE_URL`、`CODEX_GATEWAY_MODEL`）
 - **Skill 安装**：`BRAIN_SANDBOX_SKILLS_GIT`（Devbox 内 `npx skills add` 用的 git URL）
 
-## 命令一览
+## 命令
 
 ```bash
-# 跑测（唯一产品路径）
 npm run deploy -- --namespace <ns> --repo <owner/repo> --project-name <name> [--branch main]
-
-# 用例清单（批量规划）
-npm run cases:sync
-npm run benchmark -- cases list
 ```
 
 ## 目录结构
 
 ```text
 src/brain-deploy/     # Devbox 跑测流水线（task-store、runner、gateway）
-src/lib/              # 仓库内契约检查实现（见下）
-fixtures/             # 维护用 golden 样本
-cases/manifest.json   # eval 用例元数据
 docs/                 # 中文设计说明
 ```
-
-### 关于 `validate` / `suite` / `npm test`
-
-仓库里仍有对本机目录做 schema/契约检查的命令（`npm run validate`、`suite`、`npm test`），用于**维护本仓库的 fixture 与回归测试**，不是另一条「离线跑 skill」的产品路径。真实 skill 验证只通过 Devbox 跑测完成；runner 在 apply 前也会在 Devbox 内检查产物。
 
 ## 进一步阅读
 
