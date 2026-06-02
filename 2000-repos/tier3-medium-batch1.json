@@ -1,0 +1,160 @@
+{
+  "generated_at": "2026-03-01T15:11:22Z",
+  "purpose": "Tier 3 (no-docker) + medium complexity — first batch for Dockerfile generation & validation",
+  "selection_criteria": {
+    "tier": 3,
+    "deploy_complexity": "medium",
+    "manually_reviewed": true,
+    "excluded_false_positives": 13,
+    "exclusion_reasons": {
+      "CLI-TOOL": "4 projects — CLI tools misclassified as backend services",
+      "FRAMEWORK": "2 projects — framework/library itself classified as deployable service",
+      "LIBRARY": "1 projects — library classified as deployable",
+      "TUTORIAL-COLLECTION": "3 projects — tutorial/demo collections, not single deployable apps",
+      "TIER-MISCLASS": "3 projects — already have Docker images, should be Tier 1/2"
+    },
+    "sort": "stars descending",
+    "limit": 12
+  },
+  "stats": {
+    "total_tier3": 126,
+    "total_tier3_medium": 25,
+    "false_positives_removed": 13,
+    "clean_tier3_medium": 12
+  },
+  "batch_size": 12,
+  "projects": [
+    {
+      "full_name": "anuraghazra/github-readme-stats",
+      "stars": 78546,
+      "language": "JavaScript",
+      "category": "backend-service",
+      "description": ":zap: Dynamically generated stats for your github readmes",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "medium",
+      "ai_reasoning": "No official Docker image exists; the project is Vercel-optimized and requires GitHub API token configuration and environment variable setup for deployment on containerized platforms."
+    },
+    {
+      "full_name": "payloadcms/payload",
+      "stars": 40816,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "description": "Payload is the open-source, fullstack Next.js framework, giving you instant backend superpowers. Get a full TypeScript backend and admin panel instantly. Use Payload as a headless CMS or for building ",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "medium",
+      "ai_reasoning": "Payload is a full-stack Next.js CMS with database requirements; while containerizing a Node.js app is straightforward, the lack of official Docker support, need for database configuration, and emphasis on serverless deployment (Vercel/Cloudflare) add moderate complexity."
+    },
+    {
+      "full_name": "danielmiessler/Fabric",
+      "stars": 39335,
+      "language": "Go",
+      "category": "backend-service",
+      "description": "Fabric is an open-source framework for augmenting humans using AI. It provides a modular system for solving specific problems using a crowdsourced set of AI prompts that can be used anywhere.",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "medium",
+      "ai_reasoning": "Fabric is a Python-based AI framework with a REST API capability that requires configuration of multiple AI backend integrations (Azure, OpenAI, etc.) and API credentials, making it moderately complex to containerize and deploy despite being a single service."
+    },
+    {
+      "full_name": "2noise/ChatTTS",
+      "stars": 38814,
+      "language": "Python",
+      "category": "ml-serving",
+      "description": "A generative speech model for daily dialogue.",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "medium",
+      "ai_reasoning": "No official Docker image or Dockerfile exists in the repository; containerization would require handling Python dependencies, HuggingFace model downloads, optional vLLM setup, and GPU/CUDA configuration."
+    },
+    {
+      "full_name": "FreeCodeCampChina/freecodecamp.cn",
+      "stars": 37641,
+      "language": "CSS",
+      "category": "backend-service",
+      "description": "FCC China open source codebase and curriculum. Learn to code and help nonprofits.",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "medium",
+      "ai_reasoning": "Full-stack JavaScript platform with Node.js/Express backend, MongoDB database, and React frontend requires multi-service orchestration; no official Docker support or documentation provided."
+    },
+    {
+      "full_name": "carbon-app/carbon",
+      "stars": 35914,
+      "language": "JavaScript",
+      "category": "fullstack-app",
+      "description": ":black_heart: Create and share beautiful images of your source code",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "medium",
+      "ai_reasoning": "Carbon is a full-stack web application requiring authentication, user accounts, and a database for snippet storage, but the repository lacks any official Dockerfile or compose configuration."
+    },
+    {
+      "full_name": "sahat/hackathon-starter",
+      "stars": 35207,
+      "language": "JavaScript",
+      "category": "backend-service",
+      "description": "A boilerplate for Node.js web applications",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "medium",
+      "ai_reasoning": "No Dockerfile or docker-compose provided in the repository; Node.js web app with MongoDB dependency and multiple external OAuth/API integrations requires configuration setup beyond a basic container."
+    },
+    {
+      "full_name": "ehang-io/nps",
+      "stars": 33934,
+      "language": "Go",
+      "category": "backend-service",
+      "description": "一款轻量级、高性能、功能强大的内网穿透代理服务器。支持tcp、udp、socks5、http等几乎所有流量转发，可用来访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析、内网socks5代理等等……，并带有功能强大的web管理端。a lightweight, high-performance, powerful intranet penetration proxy server,",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "medium",
+      "ai_reasoning": "NPS has no official Docker image and is distributed as platform-specific binaries, but could be containerized with moderate effort due to its multi-port architecture (80, 443, 8080, 8024), configuration management, and client-server separation model."
+    },
+    {
+      "full_name": "v2fly/v2ray-core",
+      "stars": 33272,
+      "language": "Go",
+      "category": "backend-service",
+      "description": "A platform for building proxies to bypass network restrictions.",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "medium",
+      "ai_reasoning": "V2Ray is a network proxy tool requiring careful configuration and network setup; the absence of Docker files and documentation in the repo indicates no official image, and deploying this specialized networking tool would require non-trivial configuration and port management."
+    },
+    {
+      "full_name": "mckaywrigley/chatbot-ui",
+      "stars": 33050,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "description": "AI chat for any model.",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "medium",
+      "ai_reasoning": "No official Docker image is published; the app requires Supabase backend setup, environment configuration, database migrations, and multiple dependencies, making it moderately complex to containerize and deploy compared to a standard web app."
+    },
+    {
+      "full_name": "apolloconfig/apollo",
+      "stars": 29779,
+      "language": "Java",
+      "category": "backend-service",
+      "description": "Apollo is a reliable configuration management system suitable for microservice configuration management scenarios.",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "medium",
+      "ai_reasoning": "Apollo is a Spring Boot configuration management system with database dependencies and multi-component architecture (admin service, config service, clients), requiring moderate setup effort for containerized deployment despite no official Docker support in the repository."
+    },
+    {
+      "full_name": "bigint/hey",
+      "stars": 29501,
+      "language": "TypeScript",
+      "category": "frontend-app",
+      "description": "Hey is a decentralized and permissionless social media app built with Lens Protocol 🌿",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "medium",
+      "ai_reasoning": "No official Docker image is published; containerizing would require managing a monorepo structure, multiple services (api and web), PostgreSQL database integration, and proper environment variable configuration."
+    }
+  ]
+}

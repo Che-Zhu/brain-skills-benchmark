@@ -1,0 +1,283 @@
+{
+  "generated_at": "2026-02-28T10:03:51Z",
+  "purpose": "Tier 3 (no-docker) + simple complexity — first batch for Dockerfile generation & validation",
+  "selection_criteria": {
+    "tier": 3,
+    "deploy_complexity": "simple",
+    "manually_reviewed": true,
+    "excluded_false_positives": 31,
+    "exclusion_reasons": {
+      "WEAK-SIGNAL": "11 projects — \"Has start+build scripts\" misidentified libraries as apps",
+      "FW-AS-SVC": "11 projects — framework/library itself classified as deployable service",
+      "CLI-AS-SVC": "5 projects — CLI tools classified as backend services",
+      "RECLASS-ERR": "4 projects — reclassification phase misidentified SDKs/tools as apps"
+    },
+    "sort": "stars descending",
+    "limit": 20
+  },
+  "stats": {
+    "total_tier3": 126,
+    "total_tier3_simple": 53,
+    "false_positives_removed": 31,
+    "clean_tier3_simple": 22
+  },
+  "batch_size": 20,
+  "projects": [
+    {
+      "full_name": "kamranahmedse/developer-roadmap",
+      "stars": 349821,
+      "language": "TypeScript",
+      "category": "doc-site",
+      "description": "Interactive roadmaps, guides and other educational content to help developers grow in their careers.",
+      "frameworks": [],
+      "classification_reasons": [
+        "Doc framework: astro"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "No Dockerfile or official Docker image in repo; however, as a standard Node.js web application (roadmap.sh), containerizing it would be straightforward with minimal dependencies."
+    },
+    {
+      "full_name": "Snailclimb/JavaGuide",
+      "stars": 153892,
+      "language": "Java",
+      "category": "doc-site",
+      "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发与系统设计。准备后端技术面试，首选 JavaGuide！",
+      "frameworks": [],
+      "classification_reasons": [
+        "Doc framework: vuepress"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "JavaGuide is a documentation/knowledge base project with no Docker artifacts in the repo; it appears to be a static or simple web-based content site without complex dependencies or multi-service architecture."
+    },
+    {
+      "full_name": "yangshun/tech-interview-handbook",
+      "stars": 137875,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "description": "Curated coding interview preparation materials for busy software engineers",
+      "frameworks": [],
+      "classification_reasons": [
+        "Monorepo with apps/ directory"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "This is a static documentation website with no existing containerization, but deploying it would be straightforward as a single-service HTTP server serving pre-built static content."
+    },
+    {
+      "full_name": "PanJiaChen/vue-element-admin",
+      "stars": 90279,
+      "language": "Vue",
+      "category": "frontend-app",
+      "description": ":tada: A magical vue admin                                                                https://panjiachen.github.io/vue-element-admin",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "simple",
+      "ai_reasoning": "This is a frontend-only Vue.js SPA with no backend services or external dependencies; deployment requires only Node.js for building and a web server to serve static files, making it straightforward to containerize."
+    },
+    {
+      "full_name": "doocs/advanced-java",
+      "stars": 78856,
+      "language": "Java",
+      "category": "doc-site",
+      "description": "😮 Core Interview Questions & Answers For Experienced Java(Backend) Developers | 互联网 Java 工程师进阶知识完全扫盲：涵盖高并发、分布式、高可用、微服务、海量数据处理等领域知识",
+      "frameworks": [],
+      "classification_reasons": [
+        "Doc framework: vitepress"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "This is a documentation/knowledge base repository containing interview questions and architectural concepts in Markdown format with no application code, so containerization would only require serving static content, but it is not designed to be deployed as a service."
+    },
+    {
+      "full_name": "coder/code-server",
+      "stars": 76388,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "description": "VS Code in the browser",
+      "frameworks": [],
+      "classification_reasons": [
+        "Backend framework: express",
+        "Backend framework: ws"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "code-server publishes official Docker images on Docker Hub and GHCR (codercom/code-server), and deployment is straightforward as a single containerized VS Code service with standard web app requirements."
+    },
+    {
+      "full_name": "PKUFlyingPig/cs-self-learning",
+      "stars": 71457,
+      "language": "HTML",
+      "category": "doc-site",
+      "description": "计算机自学指南",
+      "frameworks": [],
+      "classification_reasons": [
+        "Python doc generator: mkdocs-material"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "This is a MkDocs-based documentation project (static learning guide) with no official Docker support, but would be trivial to containerize as it requires only a web server to serve pre-built static content."
+    },
+    {
+      "full_name": "dair-ai/Prompt-Engineering-Guide",
+      "stars": 70851,
+      "language": "MDX",
+      "category": "fullstack-app",
+      "description": "🐙 Guides, papers, lessons, notebooks and resources for prompt engineering, context engineering, RAG, and AI Agents.",
+      "frameworks": [],
+      "classification_reasons": [
+        "Fullstack framework: next",
+        "Doc framework: nextra-theme-docs",
+        "Doc framework: nextra"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "This documentation/guide project contains no Docker files or official images, but would be simple to containerize given its web-based documentation architecture with likely minimal dependencies."
+    },
+    {
+      "full_name": "microsoft/ai-agents-for-beginners",
+      "stars": 51394,
+      "language": "Jupyter Notebook",
+      "category": "backend-service",
+      "description": "12 Lessons to Get Started Building AI Agents",
+      "frameworks": [],
+      "classification_reasons": [
+        "Python WSGI/ASGI server: uvicorn"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "This is an educational course repository consisting of lessons and documentation with no existing Docker infrastructure; deploying it would require only a simple web server to serve static/markdown content."
+    },
+    {
+      "full_name": "upstash/context7",
+      "stars": 47050,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "description": "Context7 MCP Server -- Up-to-date code documentation for LLMs and AI code editors",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "simple",
+      "ai_reasoning": "Context7 is a Node.js MCP server with no official Docker image, but would be trivial to containerize as it has minimal dependencies and runs as a single service with just npm installation and startup commands."
+    },
+    {
+      "full_name": "ColorlibHQ/AdminLTE",
+      "stars": 45306,
+      "language": "CSS",
+      "category": "doc-site",
+      "description": "AdminLTE - Free admin dashboard template based on Bootstrap 5",
+      "frameworks": [],
+      "classification_reasons": [
+        "Doc framework: astro"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "AdminLTE is a frontend dashboard template that builds to static CSS/JS assets with no backend dependencies; containerizing it would require only Node.js for the build step and a simple web server to serve the compiled dist/ folder, making it trivial to containerize despite lacking official Docker support."
+    },
+    {
+      "full_name": "slidevjs/slidev",
+      "stars": 44507,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "description": "Presentation Slides for Developers",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "simple",
+      "ai_reasoning": "Slidev is a Node.js-based presentation tool distributed via npm with no official Docker image, but containerizing it would be straightforward since it has no external service dependencies and only requires Node.js and npm packages."
+    },
+    {
+      "full_name": "AykutSarac/jsoncrack.com",
+      "stars": 43380,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "description": "✨ Innovative and open-source visualization application that transforms various data formats, such as JSON, YAML, XML and CSV into interactive graphs.",
+      "frameworks": [],
+      "classification_reasons": [
+        "Monorepo with apps/ directory"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "The project provides Docker Compose configuration for local deployment of its web application (Node.js-based), but does not publish official images to public registries; deployment is straightforward as a single containerized web service."
+    },
+    {
+      "full_name": "bailicangdu/vue2-elm",
+      "stars": 41167,
+      "language": "Vue",
+      "category": "frontend-app",
+      "description": "Large single page application with 45 pages built on vue2 + vuex. 基于 vue2 + vuex 构建一个具有 45 个页面的大型单页面应用",
+      "frameworks": [],
+      "classification_reasons": [
+        "Frontend app: framework + bundler + build script, no library fields"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "This is a standard Vue2 frontend application with no official Docker image or Dockerfile in the repository, but containerization would be straightforward as it only requires Node.js, npm dependencies, and webpack build with no complex infrastructure or external service dependencies."
+    },
+    {
+      "full_name": "QSCTech/zju-icicles",
+      "stars": 40270,
+      "language": "HTML",
+      "category": "doc-site",
+      "description": "浙江大学课程攻略共享计划",
+      "frameworks": [],
+      "classification_reasons": [
+        "Python doc generator: mkdocs"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "This is a GitHub repository for sharing course materials (documents, PDFs, exams, notes) with no application code, backend services, or dependencies to containerize; if deployed, it would only require basic static file hosting."
+    },
+    {
+      "full_name": "bmad-code-org/BMAD-METHOD",
+      "stars": 38170,
+      "language": "JavaScript",
+      "category": "doc-site",
+      "description": "Breakthrough Method for Agile Ai Driven Development",
+      "frameworks": [],
+      "classification_reasons": [
+        "Doc framework: astro"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "No official Docker image exists; the project is a CLI-based Node.js framework without containerization, making it straightforward to containerize with a basic Node.js Dockerfile if needed."
+    },
+    {
+      "full_name": "alan2207/bulletproof-react",
+      "stars": 34520,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "description": "🛡️ ⚛️ A simple, scalable, and powerful architecture for building production ready React applications. ",
+      "frameworks": [],
+      "classification_reasons": [],
+      "ai_complexity": "simple",
+      "ai_reasoning": "This is an architecture guide repository with sample React applications; no official Docker image is published, but containerizing the sample apps would be straightforward as they are standard Node.js-based React web applications."
+    },
+    {
+      "full_name": "vbenjs/vue-vben-admin",
+      "stars": 31604,
+      "language": "Vue",
+      "category": "fullstack-app",
+      "description": "A modern vue admin panel built with Vue3, Shadcn UI, Vite, TypeScript, and Monorepo. It's fast!",
+      "frameworks": [],
+      "classification_reasons": [
+        "Monorepo with apps/ directory",
+        "Has docker-related npm scripts"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "Vue Vben Admin is a frontend-only SPA with no official Docker image; deploying it requires only building the Vue app and serving static assets via a simple HTTP server."
+    },
+    {
+      "full_name": "thedotmack/claude-mem",
+      "stars": 31271,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "description": "A Claude Code plugin that automatically captures everything Claude does during your coding sessions, compresses it with AI (using Claude's agent-sdk), and injects relevant context back into future ses",
+      "frameworks": [],
+      "classification_reasons": [
+        "Backend framework: express"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "It's a Node.js-based Claude Code extension with no official Docker image, but containerizing it would require only a basic Node.js Dockerfile and dependency installation."
+    },
+    {
+      "full_name": "AMAI-GmbH/AI-Expert-Roadmap",
+      "stars": 30762,
+      "language": "JavaScript",
+      "category": "doc-site",
+      "description": "Roadmap to becoming an Artificial Intelligence Expert in 2022",
+      "frameworks": [],
+      "classification_reasons": [
+        "Doc framework: vuepress"
+      ],
+      "ai_complexity": "simple",
+      "ai_reasoning": "This is a static documentation and roadmap project with no backend components, so it requires no Docker infrastructure and would be trivial to containerize if needed."
+    }
+  ]
+}

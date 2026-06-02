@@ -1,0 +1,1032 @@
+{
+  "generated_at": "2026-02-28T04:39:46Z",
+  "summary": {
+    "total_unknown_input": 233,
+    "reclassified": 233,
+    "reclassified_pct": "100.0%",
+    "still_unknown": 0,
+    "new_deployable": 56,
+    "new_not_deployable": 177
+  },
+  "new_category_distribution": {
+    "framework-or-library": 50,
+    "backend-service": 39,
+    "education-or-tutorial": 34,
+    "system-tool": 32,
+    "ai-agent-or-tool": 21,
+    "mobile-app": 17,
+    "cli-tool": 16,
+    "fullstack-app": 13,
+    "desktop-app": 4,
+    "game-engine-or-tool": 2,
+    "data-tool": 2,
+    "frontend-app": 1,
+    "devops-tool": 1,
+    "browser-extension": 1
+  },
+  "confidence_distribution": {
+    "medium": 70,
+    "high": 91,
+    "low": 72
+  },
+  "language_breakdown": {
+    "TypeScript": {
+      "total": 40,
+      "reclassified": 40,
+      "new_deployable": 17
+    },
+    "Python": {
+      "total": 37,
+      "reclassified": 37,
+      "new_deployable": 9
+    },
+    "JavaScript": {
+      "total": 32,
+      "reclassified": 32,
+      "new_deployable": 4
+    },
+    "Rust": {
+      "total": 31,
+      "reclassified": 31,
+      "new_deployable": 6
+    },
+    "Java": {
+      "total": 25,
+      "reclassified": 25,
+      "new_deployable": 6
+    },
+    "C++": {
+      "total": 9,
+      "reclassified": 9,
+      "new_deployable": 1
+    },
+    "Go": {
+      "total": 9,
+      "reclassified": 9,
+      "new_deployable": 6
+    },
+    "Jupyter Notebook": {
+      "total": 7,
+      "reclassified": 7,
+      "new_deployable": 0
+    },
+    "C#": {
+      "total": 7,
+      "reclassified": 7,
+      "new_deployable": 1
+    },
+    "C": {
+      "total": 5,
+      "reclassified": 5,
+      "new_deployable": 0
+    },
+    "null": {
+      "total": 4,
+      "reclassified": 4,
+      "new_deployable": 0
+    },
+    "Kotlin": {
+      "total": 4,
+      "reclassified": 4,
+      "new_deployable": 0
+    },
+    "HTML": {
+      "total": 4,
+      "reclassified": 4,
+      "new_deployable": 0
+    },
+    "Shell": {
+      "total": 3,
+      "reclassified": 3,
+      "new_deployable": 2
+    },
+    "Dockerfile": {
+      "total": 2,
+      "reclassified": 2,
+      "new_deployable": 1
+    },
+    "Clojure": {
+      "total": 2,
+      "reclassified": 2,
+      "new_deployable": 2
+    },
+    "Vue": {
+      "total": 1,
+      "reclassified": 1,
+      "new_deployable": 1
+    },
+    "Zig": {
+      "total": 1,
+      "reclassified": 1,
+      "new_deployable": 0
+    },
+    "Assembly": {
+      "total": 1,
+      "reclassified": 1,
+      "new_deployable": 0
+    },
+    "Markdown": {
+      "total": 1,
+      "reclassified": 1,
+      "new_deployable": 0
+    },
+    "Makefile": {
+      "total": 1,
+      "reclassified": 1,
+      "new_deployable": 0
+    },
+    "MDX": {
+      "total": 1,
+      "reclassified": 1,
+      "new_deployable": 0
+    },
+    "Scala": {
+      "total": 1,
+      "reclassified": 1,
+      "new_deployable": 0
+    },
+    "Swift": {
+      "total": 1,
+      "reclassified": 1,
+      "new_deployable": 0
+    },
+    "Svelte": {
+      "total": 1,
+      "reclassified": 1,
+      "new_deployable": 0
+    },
+    "Ruby": {
+      "total": 1,
+      "reclassified": 1,
+      "new_deployable": 0
+    },
+    "LLVM": {
+      "total": 1,
+      "reclassified": 1,
+      "new_deployable": 0
+    },
+    "Objective-C": {
+      "total": 1,
+      "reclassified": 1,
+      "new_deployable": 0
+    }
+  },
+  "examples_by_category": {
+    "education-or-tutorial": [
+      {
+        "full_name": "freeCodeCamp/freeCodeCamp",
+        "stars": 437556,
+        "language": "TypeScript",
+        "description": "freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming,",
+        "reasons": [
+          "Education project: topics=education, desc_match=True"
+        ]
+      },
+      {
+        "full_name": "trekhleb/javascript-algorithms",
+        "stars": 195697,
+        "language": "JavaScript",
+        "description": "📝 Algorithms and data structures implemented in JavaScript with explanations and",
+        "reasons": [
+          "Education project: topics=algorithm, algorithms, data-structures, interview, interview-preparation, desc_match=True"
+        ]
+      },
+      {
+        "full_name": "airbnb/javascript",
+        "stars": 148088,
+        "language": "JavaScript",
+        "description": "JavaScript Style Guide",
+        "reasons": [
+          "AI classification: education-or-tutorial — This is Airbnb's comprehensive JavaScript style guide that educates developers on coding standards, conventions, and best practices for modern JavaScript, not a deployable application or service."
+        ]
+      },
+      {
+        "full_name": "goldbergyoni/nodebestpractices",
+        "stars": 105128,
+        "language": "Dockerfile",
+        "description": ":white_check_mark:  The Node.js best practices list (July 2024)",
+        "reasons": [
+          "Weak education signal: topics=[], desc_match=True"
+        ]
+      },
+      {
+        "full_name": "microsoft/Web-Dev-For-Beginners",
+        "stars": 95340,
+        "language": "JavaScript",
+        "description": "24 Lessons, 12 Weeks, Get Started as a Web Developer",
+        "reasons": [
+          "Education project: topics=education, learning, tutorials, desc_match=False"
+        ]
+      },
+      {
+        "full_name": "microsoft/ML-For-Beginners",
+        "stars": 84011,
+        "language": "Jupyter Notebook",
+        "description": "12 weeks, 26 lessons, 52 quizzes, classic Machine Learning for all",
+        "reasons": [
+          "Weak education signal: topics=['education'], desc_match=False"
+        ]
+      },
+      {
+        "full_name": "ByteByteGoHq/system-design-101",
+        "stars": 79847,
+        "language": null,
+        "description": "Explain complex systems using visuals and simple terms. Help you prepare for sys",
+        "reasons": [
+          "Education project: topics=interview-questions, desc_match=True"
+        ]
+      },
+      {
+        "full_name": "MisterBooo/LeetCodeAnimation",
+        "stars": 76722,
+        "language": "Java",
+        "description": "Demonstrate all the questions on LeetCode in the form of animation.（用动画的形式呈现解Lee",
+        "reasons": [
+          "Weak education signal: topics=['leetcode'], desc_match=False"
+        ]
+      },
+      {
+        "full_name": "d2l-ai/d2l-zh",
+        "stars": 75842,
+        "language": "Python",
+        "description": "《动手学深度学习》：面向中文读者、能运行、可讨论。中英文版被70多个国家的500多所大学用于教学。",
+        "reasons": [
+          "AI classification: education-or-tutorial — This is an open-source educational textbook on deep learning with chapters, runnable code examples, and exercises used by 500+ universities for teaching, not a deployable service."
+        ]
+      },
+      {
+        "full_name": "sdmg15/Best-websites-a-programmer-should-visit",
+        "stars": 75755,
+        "language": null,
+        "description": ":link: Some useful websites for programmers.",
+        "reasons": [
+          "AI classification: education-or-tutorial — This is a curated collection of educational links and resources for programmers across various topics (coding practice, interviews, tutorials, etc.), not a deployable service or tool."
+        ]
+      }
+    ],
+    "cli-tool": [
+      {
+        "full_name": "ytdl-org/youtube-dl",
+        "stars": 139739,
+        "language": "Python",
+        "description": "Command-line program to download videos from YouTube.com and other video sites",
+        "reasons": [
+          "AI classification: cli-tool — youtube-dl is a command-line program designed to be installed locally and run from the terminal with various options, not a web service or library"
+        ]
+      },
+      {
+        "full_name": "FuelLabs/sway",
+        "stars": 61927,
+        "language": "Rust",
+        "description": "🌴 Empowering everyone to build reliable and efficient smart contracts.",
+        "reasons": [
+          "Rust project without web framework — likely CLI/system tool"
+        ]
+      },
+      {
+        "full_name": "FiloSottile/mkcert",
+        "stars": 58192,
+        "language": "Go",
+        "description": "A simple zero-config tool to make locally trusted development certificates with ",
+        "reasons": [
+          "AI classification: cli-tool — mkcert is a command-line utility that developers run locally to generate and install SSL/TLS certificates for development, invoked via terminal commands like `mkcert -install` and `mkcert example.com`."
+        ]
+      },
+      {
+        "full_name": "FuelLabs/fuels-rs",
+        "stars": 43414,
+        "language": "Rust",
+        "description": "Fuel Network Rust SDK",
+        "reasons": [
+          "Rust project without web framework — likely CLI/system tool"
+        ]
+      },
+      {
+        "full_name": "helix-editor/helix",
+        "stars": 43145,
+        "language": "Rust",
+        "description": "A post-modern modal text editor.",
+        "reasons": [
+          "Rust project without web framework — likely CLI/system tool"
+        ]
+      },
+      {
+        "full_name": "httpie/cli",
+        "stars": 37606,
+        "language": "Python",
+        "description": "🥧 HTTPie CLI  — modern, user-friendly command-line HTTP client for the API era. ",
+        "reasons": [
+          "AI classification: cli-tool — HTTPie is a command-line HTTP client tool for making API requests from the terminal, not a deployable service."
+        ]
+      },
+      {
+        "full_name": "tw93/Mole",
+        "stars": 37207,
+        "language": "Shell",
+        "description": "🐹 Deep clean and optimize your Mac.",
+        "reasons": [
+          "AI classification: cli-tool — Mole is a command-line tool providing interactive and scripted macOS system cleaning and optimization commands, not a deployable web service or library."
+        ]
+      },
+      {
+        "full_name": "spacedriveapp/spacedrive",
+        "stars": 37160,
+        "language": "Rust",
+        "description": "Spacedrive is an open source cross-platform file explorer, powered by a virtual ",
+        "reasons": [
+          "Rust project without web framework — likely CLI/system tool"
+        ]
+      },
+      {
+        "full_name": "lerna/lerna",
+        "stars": 36088,
+        "language": "TypeScript",
+        "description": "Lerna is a fast, modern build system for managing and publishing multiple JavaSc",
+        "reasons": [
+          "AI classification: cli-tool — Lerna is a command-line tool for managing and publishing monorepos; users interact with it primarily through CLI commands like 'lerna publish' and 'lerna run'."
+        ]
+      },
+      {
+        "full_name": "servo/servo",
+        "stars": 35580,
+        "language": "Rust",
+        "description": "Servo aims to empower developers with a lightweight, high-performance alternativ",
+        "reasons": [
+          "Rust project without web framework — likely CLI/system tool"
+        ]
+      }
+    ],
+    "system-tool": [
+      {
+        "full_name": "Genymobile/scrcpy",
+        "stars": 136216,
+        "language": "C",
+        "description": "Display and control your Android device",
+        "reasons": [
+          "Native build system: meson.build (c)"
+        ]
+      },
+      {
+        "full_name": "nodejs/node",
+        "stars": 115971,
+        "language": "JavaScript",
+        "description": "Node.js JavaScript runtime ✨🐢🚀✨",
+        "reasons": [
+          "System tool: topics=runtime, desc_match=True"
+        ]
+      },
+      {
+        "full_name": "microsoft/terminal",
+        "stars": 101923,
+        "language": "C++",
+        "description": "The new Windows Terminal and the original Windows console host, all in the same ",
+        "reasons": [
+          "Native language (c++) without web framework or native build in root"
+        ]
+      },
+      {
+        "full_name": "ggml-org/llama.cpp",
+        "stars": 95996,
+        "language": "C++",
+        "description": "LLM inference in C/C++",
+        "reasons": [
+          "Native build system: CMakeLists.txt, Makefile (c++)"
+        ]
+      },
+      {
+        "full_name": "oven-sh/bun",
+        "stars": 87678,
+        "language": "Zig",
+        "description": "Incredibly fast JavaScript runtime, bundler, test runner, and package manager – ",
+        "reasons": [
+          "Native build system: CMakeLists.txt (zig)",
+          "Confirmed by description keywords"
+        ]
+      },
+      {
+        "full_name": "NationalSecurityAgency/ghidra",
+        "stars": 65042,
+        "language": "Java",
+        "description": "Ghidra is a software reverse engineering (SRE) framework",
+        "reasons": [
+          "AI classification: system-tool — Ghidra is a reverse engineering framework and tool for analyzing compiled code at the system level, fitting the explicit description of reverse engineering tools in the system-tool category; it's a desktop application, not a web service."
+        ]
+      },
+      {
+        "full_name": "chrislgarry/Apollo-11",
+        "stars": 64601,
+        "language": "Assembly",
+        "description": "Original Apollo 11 Guidance Computer (AGC) source code for the command and lunar",
+        "reasons": [
+          "Native language (assembly) without web framework or native build in root"
+        ]
+      },
+      {
+        "full_name": "alacritty/alacritty",
+        "stars": 62696,
+        "language": "Rust",
+        "description": "A cross-platform, OpenGL terminal emulator.",
+        "reasons": [
+          "Native build system: Makefile (rust)",
+          "Confirmed by topics: terminal"
+        ]
+      },
+      {
+        "full_name": "LadybirdBrowser/ladybird",
+        "stars": 60314,
+        "language": "C++",
+        "description": "Truly independent web browser",
+        "reasons": [
+          "Native build system: CMakeLists.txt (c++)"
+        ]
+      },
+      {
+        "full_name": "FuelLabs/fuel-core",
+        "stars": 57355,
+        "language": "Rust",
+        "description": "Rust full node implementation of the Fuel v2 protocol.",
+        "reasons": [
+          "Native build system: Makefile (rust)"
+        ]
+      }
+    ],
+    "ai-agent-or-tool": [
+      {
+        "full_name": "anomalyco/opencode",
+        "stars": 111825,
+        "language": "TypeScript",
+        "description": "The open source coding agent.",
+        "reasons": [
+          "AI classification: ai-agent-or-tool — An open source AI coding agent distributed primarily as a CLI tool and desktop application, with a web UI component but not designed as a deployable web service."
+        ]
+      },
+      {
+        "full_name": "microsoft/generative-ai-for-beginners",
+        "stars": 107126,
+        "language": "Jupyter Notebook",
+        "description": "21 Lessons, Get Started Building with Generative AI ",
+        "reasons": [
+          "AI/LLM tool: topics=ai, chatgpt, generative-ai, gpt, openai"
+        ]
+      },
+      {
+        "full_name": "CompVis/stable-diffusion",
+        "stars": 72578,
+        "language": "Jupyter Notebook",
+        "description": "A latent text-to-image diffusion model",
+        "reasons": [
+          "AI classification: ai-agent-or-tool — Stable Diffusion is a pre-trained text-to-image diffusion model—an AI tool for generating images from text prompts—rather than a framework, library, or web service."
+        ]
+      },
+      {
+        "full_name": "openai/codex",
+        "stars": 62117,
+        "language": "Rust",
+        "description": "Lightweight coding agent that runs in your terminal",
+        "reasons": [
+          "AI classification: ai-agent-or-tool — Codex is fundamentally an AI coding agent from OpenAI that users interact with primarily through a CLI interface, though it also has desktop and web variants; it's not designed for deployment as a web service."
+        ]
+      },
+      {
+        "full_name": "cline/cline",
+        "stars": 58418,
+        "language": "TypeScript",
+        "description": "Autonomous coding agent right in your IDE, capable of creating/editing files, ex",
+        "reasons": [
+          "AI classification: ai-agent-or-tool — Cline is an autonomous AI coding agent powered by Claude that runs as a VS Code extension, providing agentic assistance for software development tasks with human-in-the-loop approval."
+        ]
+      },
+      {
+        "full_name": "pathwaycom/llm-app",
+        "stars": 56287,
+        "language": "Jupyter Notebook",
+        "description": "Ready-to-run cloud templates for RAG, AI pipelines, and enterprise search with l",
+        "reasons": [
+          "AI/LLM tool: topics=chatbot, llm, rag"
+        ]
+      },
+      {
+        "full_name": "Mintplex-Labs/anything-llm",
+        "stars": 55095,
+        "language": "JavaScript",
+        "description": "The all-in-one Desktop & Docker AI application with built-in RAG, AI agents, No-",
+        "reasons": [
+          "AI/LLM tool: topics=llm, rag"
+        ]
+      },
+      {
+        "full_name": "lencx/ChatGPT",
+        "stars": 54381,
+        "language": "Rust",
+        "description": "🔮 ChatGPT Desktop Application (Mac, Windows and Linux)",
+        "reasons": [
+          "AI/LLM tool: topics=ai, chatgpt, gpt, openai"
+        ]
+      },
+      {
+        "full_name": "unslothai/unsloth",
+        "stars": 52797,
+        "language": "Python",
+        "description": "Fine-tuning & Reinforcement Learning for LLMs. 🦥 Train OpenAI gpt-oss, DeepSeek,",
+        "reasons": [
+          "AI/LLM tool: topics=agent, llama, llm, openai"
+        ]
+      },
+      {
+        "full_name": "xai-org/grok-1",
+        "stars": 51518,
+        "language": "Python",
+        "description": "Grok open release",
+        "reasons": [
+          "AI classification: ai-agent-or-tool — This is the official reference implementation for loading and running Grok-1, a 314B parameter language model, providing the core AI inference code and utilities rather than a service or library for external dependencies."
+        ]
+      }
+    ],
+    "game-engine-or-tool": [
+      {
+        "full_name": "godotengine/godot",
+        "stars": 107117,
+        "language": "C++",
+        "description": "Godot Engine – Multi-platform 2D and 3D game engine",
+        "reasons": [
+          "Game project: topics=game-development, game-engine, gamedev, godot"
+        ]
+      },
+      {
+        "full_name": "bevyengine/bevy",
+        "stars": 44806,
+        "language": "Rust",
+        "description": "A refreshingly simple data-driven game engine built in Rust",
+        "reasons": [
+          "Game project: topics=game-development, game-engine, gamedev"
+        ]
+      }
+    ],
+    "backend-service": [
+      {
+        "full_name": "facebook/create-react-app",
+        "stars": 103830,
+        "language": "JavaScript",
+        "description": "Set up a modern web app by running one command.",
+        "reasons": [
+          "Deployment config found: netlify.toml"
+        ]
+      },
+      {
+        "full_name": "Anduin2017/HowToCook",
+        "stars": 98302,
+        "language": "Dockerfile",
+        "description": "程序员在家做饭方法指南。Programmer's guide about how to cook at home (Simplified Chinese onl",
+        "reasons": [
+          "Has Docker artifacts, no web framework detected — likely deployable"
+        ]
+      },
+      {
+        "full_name": "nvm-sh/nvm",
+        "stars": 91884,
+        "language": "Shell",
+        "description": "Node Version Manager - POSIX-compliant bash script to manage multiple active nod",
+        "reasons": [
+          "Has Docker artifacts, no web framework detected — likely deployable"
+        ]
+      },
+      {
+        "full_name": "anuraghazra/github-readme-stats",
+        "stars": 78546,
+        "language": "JavaScript",
+        "description": ":zap: Dynamically generated stats for your github readmes",
+        "reasons": [
+          "Deployment config found: vercel.json"
+        ]
+      },
+      {
+        "full_name": "junegunn/fzf",
+        "stars": 78166,
+        "language": "Go",
+        "description": ":cherry_blossom: A command-line fuzzy finder",
+        "reasons": [
+          "Has Docker artifacts, no web framework detected — likely deployable"
+        ]
+      },
+      {
+        "full_name": "elastic/elasticsearch",
+        "stars": 76192,
+        "language": "Java",
+        "description": "Free and Open Source, Distributed, RESTful Search Engine",
+        "reasons": [
+          "AI classification: backend-service — Elasticsearch is a distributed search engine that runs as a server daemon with HTTP/REST API endpoints for querying and indexing data, making it a deployable backend service."
+        ]
+      },
+      {
+        "full_name": "zed-industries/zed",
+        "stars": 76036,
+        "language": "Rust",
+        "description": "Code at the speed of thought – Zed is a high-performance, multiplayer code edito",
+        "reasons": [
+          "Deployment config found: Procfile"
+        ]
+      },
+      {
+        "full_name": "unionlabs/union",
+        "stars": 74288,
+        "language": "Rust",
+        "description": "The trust-minimized, zero-knowledge bridging protocol, designed for censorship r",
+        "reasons": [
+          "Deployment config found: vercel.json"
+        ]
+      },
+      {
+        "full_name": "sherlock-project/sherlock",
+        "stars": 73197,
+        "language": "Python",
+        "description": "Hunt down social media accounts by username across social networks",
+        "reasons": [
+          "Has Docker artifacts, no web framework detected — likely deployable"
+        ]
+      },
+      {
+        "full_name": "jesseduffield/lazygit",
+        "stars": 73102,
+        "language": "Go",
+        "description": "simple terminal UI for git commands",
+        "reasons": [
+          "Has Docker artifacts, no web framework detected — likely deployable"
+        ]
+      }
+    ],
+    "framework-or-library": [
+      {
+        "full_name": "puppeteer/puppeteer",
+        "stars": 93665,
+        "language": "TypeScript",
+        "description": "JavaScript API for Chrome and Firefox",
+        "reasons": [
+          "AI classification: framework-or-library — Puppeteer is a reusable JavaScript library/SDK for browser automation that developers import and use in their applications, not a standalone service."
+        ]
+      },
+      {
+        "full_name": "chartjs/Chart.js",
+        "stars": 67195,
+        "language": "JavaScript",
+        "description": "Simple HTML5 Charts using the <canvas> tag",
+        "reasons": [
+          "Library detected: Library fields: exports, types, main, module; Multiple lib fields without bin: exports, types, main, module"
+        ]
+      },
+      {
+        "full_name": "apache/echarts",
+        "stars": 65804,
+        "language": "TypeScript",
+        "description": "Apache ECharts is a powerful, interactive charting and data visualization librar",
+        "reasons": [
+          "Library detected: Multiple lib fields without bin: exports, types, main, module"
+        ]
+      },
+      {
+        "full_name": "socketio/socket.io",
+        "stars": 62903,
+        "language": "TypeScript",
+        "description": "Realtime application framework (Node.JS server)",
+        "reasons": [
+          "AI classification: framework-or-library — Socket.IO is a reusable realtime communication framework/library for Node.js that developers integrate into their applications, not a standalone service."
+        ]
+      },
+      {
+        "full_name": "angular/angular.js",
+        "stars": 58932,
+        "language": "JavaScript",
+        "description": "AngularJS - HTML enhanced for web apps!",
+        "reasons": [
+          "AI classification: framework-or-library — AngularJS is a JavaScript framework for building client-side web applications that other projects depend on; it's not a deployable service or standalone application."
+        ]
+      },
+      {
+        "full_name": "gatsbyjs/gatsby",
+        "stars": 55951,
+        "language": "JavaScript",
+        "description": "React-based framework with performance, scalability, and security built in.",
+        "reasons": [
+          "AI classification: framework-or-library — Gatsby is a reusable React framework that developers depend on to build websites and web applications, not a standalone service or application itself."
+        ]
+      },
+      {
+        "full_name": "mozilla/pdf.js",
+        "stars": 52885,
+        "language": "JavaScript",
+        "description": "PDF Reader in JavaScript",
+        "reasons": [
+          "AI classification: framework-or-library — PDF.js is a reusable JavaScript library for parsing and rendering PDFs that other projects depend on; while it includes a web viewer and browser extensions, the primary purpose is as a toolkit for PDF handling rather than a standalone deployed service."
+        ]
+      },
+      {
+        "full_name": "google/guava",
+        "stars": 51478,
+        "language": "Java",
+        "description": "Google core libraries for Java",
+        "reasons": [
+          "AI classification: framework-or-library — Guava is a reusable Java library providing collections, utilities, and APIs that other Java projects depend on via Maven/Gradle, not a standalone service or application."
+        ]
+      },
+      {
+        "full_name": "Semantic-Org/Semantic-UI",
+        "stars": 51138,
+        "language": "JavaScript",
+        "description": "Semantic is a UI component framework based around useful principles from natural",
+        "reasons": [
+          "Library detected: peerDependencies found"
+        ]
+      },
+      {
+        "full_name": "DefinitelyTyped/DefinitelyTyped",
+        "stars": 50993,
+        "language": "TypeScript",
+        "description": "The repository for high quality TypeScript type definitions.",
+        "reasons": [
+          "AI classification: framework-or-library — A monorepo library providing TypeScript type definitions published to npm as a reusable SDK that other projects depend on."
+        ]
+      }
+    ],
+    "frontend-app": [
+      {
+        "full_name": "PanJiaChen/vue-element-admin",
+        "stars": 90279,
+        "language": "Vue",
+        "description": ":tada: A magical vue admin                                                      ",
+        "reasons": [
+          "AI classification: frontend-app — A production-ready Vue.js admin dashboard template for building management system frontends with Element UI components, configurable and deployable as a standalone web application."
+        ]
+      }
+    ],
+    "fullstack-app": [
+      {
+        "full_name": "hoppscotch/hoppscotch",
+        "stars": 77939,
+        "language": "TypeScript",
+        "description": "Open-Source API Development Ecosystem • https://hoppscotch.io • Offline, On-Prem",
+        "reasons": [
+          "Web framework detected in code: @nestjs/platform-express, @nestjs/core, express",
+          "Monorepo web app: packages/hoppscotch-backend: @nestjs/platform-express, @nestjs/core, express"
+        ]
+      },
+      {
+        "full_name": "remix-run/react-router",
+        "stars": 56266,
+        "language": "TypeScript",
+        "description": "Declarative routing for React",
+        "reasons": [
+          "Web framework detected in code: express",
+          "Monorepo web app: packages/react-router-dev: express"
+        ]
+      },
+      {
+        "full_name": "FlowiseAI/Flowise",
+        "stars": 49376,
+        "language": "TypeScript",
+        "description": "Build AI Agents, Visually",
+        "reasons": [
+          "Web framework detected in code: express",
+          "Monorepo web app: packages/components: express"
+        ]
+      },
+      {
+        "full_name": "upstash/context7",
+        "stars": 47050,
+        "language": "TypeScript",
+        "description": "Context7 MCP Server -- Up-to-date code documentation for LLMs and AI code editor",
+        "reasons": [
+          "Web framework detected in code: express",
+          "Monorepo web app: packages/mcp: express"
+        ]
+      },
+      {
+        "full_name": "serverless/serverless",
+        "stars": 46951,
+        "language": "JavaScript",
+        "description": "⚡ Serverless Framework – Effortlessly build apps that auto-scale, incur zero cos",
+        "reasons": [
+          "Web framework detected in code: express",
+          "Monorepo web app: packages/mcp: express"
+        ]
+      },
+      {
+        "full_name": "penpot/penpot",
+        "stars": 44444,
+        "language": "Clojure",
+        "description": "Penpot: The open-source design tool for design and code collaboration",
+        "reasons": [
+          "AI classification: fullstack-app — Penpot is a complete web-based design application with a Clojure backend and ClojureScript frontend that can be deployed as a self-hosted service with Docker support."
+        ]
+      },
+      {
+        "full_name": "twentyhq/twenty",
+        "stars": 40088,
+        "language": "TypeScript",
+        "description": "Building a modern alternative to Salesforce, powered by the community.",
+        "reasons": [
+          "AI classification: fullstack-app — Twenty is a complete web application with React frontend and NestJS backend, featuring a CRM UI, GraphQL API, PostgreSQL database, and Docker deployment support for self-hosting."
+        ]
+      },
+      {
+        "full_name": "Kong/insomnia",
+        "stars": 37970,
+        "language": "TypeScript",
+        "description": "The open-source, cross-platform API client for GraphQL, REST, WebSockets, SSE an",
+        "reasons": [
+          "Web framework detected in code: express",
+          "Monorepo web app: packages/insomnia-smoke-test: express"
+        ]
+      },
+      {
+        "full_name": "YunaiV/ruoyi-vue-pro",
+        "stars": 35516,
+        "language": "Java",
+        "description": "🔥 官方推荐 🔥 RuoYi-Vue 全新 Pro 版本，优化重构所有功能。基于 Spring Boot + MyBatis Plus + Vue & Elem",
+        "reasons": [
+          "AI classification: fullstack-app — A complete full-stack business management platform combining Spring Boot backend, Vue frontend (multiple versions), and integrated modules for CRM, ERP, e-commerce, and workflow management, deployable as a web service."
+        ]
+      },
+      {
+        "full_name": "alan2207/bulletproof-react",
+        "stars": 34520,
+        "language": "TypeScript",
+        "description": "🛡️ ⚛️ A simple, scalable, and powerful architecture for building production read",
+        "reasons": [
+          "Web framework detected in code: next, express",
+          "Monorepo web app: apps/nextjs-app: next, express"
+        ]
+      }
+    ],
+    "devops-tool": [
+      {
+        "full_name": "ansible/ansible",
+        "stars": 68131,
+        "language": "Python",
+        "description": "Ansible is a radically simple IT automation platform that makes your application",
+        "reasons": [
+          "AI classification: devops-tool — Ansible is an infrastructure automation and configuration management platform primarily used as a CLI tool for deployment, cloud provisioning, and IT orchestration workflows."
+        ]
+      }
+    ],
+    "browser-extension": [
+      {
+        "full_name": "gorhill/uBlock",
+        "stars": 61780,
+        "language": "JavaScript",
+        "description": "uBlock Origin - An efficient blocker for Chromium and Firefox. Fast and lean.",
+        "reasons": [
+          "Browser extension signals from topics/description"
+        ]
+      }
+    ],
+    "desktop-app": [
+      {
+        "full_name": "shadowsocks/shadowsocks-windows",
+        "stars": 59245,
+        "language": "C#",
+        "description": "A C# port of shadowsocks",
+        "reasons": [
+          "AI classification: desktop-app — A Windows desktop GUI application written in C# that provides system proxy configuration, PAC modes, and server management through a system tray interface."
+        ]
+      },
+      {
+        "full_name": "usebruno/bruno",
+        "stars": 41153,
+        "language": "JavaScript",
+        "description": "Opensource IDE For Exploring and Testing API's (lightweight alternative to Postm",
+        "reasons": [
+          "AI classification: desktop-app — Bruno is a desktop IDE for API testing and exploration (similar to Postman/Insomnia), designed to run locally on user machines with offline-first, filesystem-based storage rather than as a deployable web service."
+        ]
+      },
+      {
+        "full_name": "huiyadanli/RevokeMsgPatcher",
+        "stars": 36931,
+        "language": "C#",
+        "description": ":trollface: A hex editor for WeChat/QQ/TIM - PC版微信/QQ/TIM防撤回补丁（我已经看到了，撤回也没用了）",
+        "reasons": [
+          "AI classification: desktop-app — A Windows GUI application written in C#/.NET Framework that users download and run locally to patch WeChat/QQ/TIM message revocation features."
+        ]
+      },
+      {
+        "full_name": "ShareX/ShareX",
+        "stars": 35721,
+        "language": "C#",
+        "description": "ShareX is a free and open-source application that enables users to capture or re",
+        "reasons": [
+          "AI classification: desktop-app — A native desktop GUI application for Windows that captures screenshots, records screen videos, and uploads content to multiple services, distributed via Steam and Microsoft Store."
+        ]
+      }
+    ],
+    "mobile-app": [
+      {
+        "full_name": "laurent22/joplin",
+        "stars": 53646,
+        "language": "TypeScript",
+        "description": "Joplin - the privacy-focused note taking app with sync capabilities for Windows,",
+        "reasons": [
+          "Mobile app: topics=android, react-native"
+        ]
+      },
+      {
+        "full_name": "ionic-team/ionic-framework",
+        "stars": 52382,
+        "language": "TypeScript",
+        "description": "A powerful cross-platform UI toolkit for building native-quality iOS, Android, a",
+        "reasons": [
+          "Mobile app: topics=ios, mobile"
+        ]
+      },
+      {
+        "full_name": "termux/termux-app",
+        "stars": 51184,
+        "language": "Java",
+        "description": "Termux - a terminal emulator application for Android OS extendible by variety of",
+        "reasons": [
+          "Android project files (settings.gradle + Java/Kotlin)"
+        ]
+      },
+      {
+        "full_name": "android/architecture-samples",
+        "stars": 45582,
+        "language": "Kotlin",
+        "description": "A collection of samples to discuss and showcase different architectural tools an",
+        "reasons": [
+          "Android project files (settings.gradle + Java/Kotlin)"
+        ]
+      },
+      {
+        "full_name": "gedoor/legado",
+        "stars": 44372,
+        "language": "Kotlin",
+        "description": "Legado 3.0 Book Reader with powerful controls & full functions❤️阅读3.0, 阅读是一款可以自定",
+        "reasons": [
+          "Android project files (settings.gradle + Java/Kotlin)"
+        ]
+      },
+      {
+        "full_name": "square/retrofit",
+        "stars": 43894,
+        "language": "HTML",
+        "description": "A type-safe HTTP client for Android and the JVM",
+        "reasons": [
+          "Mobile app: topics=android"
+        ]
+      },
+      {
+        "full_name": "dcloudio/uni-app",
+        "stars": 41431,
+        "language": "JavaScript",
+        "description": "A cross-platform framework using Vue.js",
+        "reasons": [
+          "Mobile app: topics=android, ios"
+        ]
+      },
+      {
+        "full_name": "PhilJay/MPAndroidChart",
+        "stars": 38226,
+        "language": "Java",
+        "description": "A powerful 🚀 Android chart view / graph view library, supporting line- bar- pie-",
+        "reasons": [
+          "Mobile app: topics=android"
+        ]
+      },
+      {
+        "full_name": "TeamNewPipe/NewPipe",
+        "stars": 37342,
+        "language": "Java",
+        "description": "A libre lightweight streaming front-end for Android.",
+        "reasons": [
+          "Android project files (settings.gradle + Java/Kotlin)"
+        ]
+      },
+      {
+        "full_name": "NervJS/taro",
+        "stars": 37316,
+        "language": "TypeScript",
+        "description": "开放式跨端跨框架解决方案，支持使用 React/Vue 等框架来开发微信/京东/百度/支付宝/字节跳动/ QQ 小程序/H5/React Native 等应用。",
+        "reasons": [
+          "Mobile app: topics=react-native"
+        ]
+      }
+    ],
+    "data-tool": [
+      {
+        "full_name": "chinese-poetry/chinese-poetry",
+        "stars": 50994,
+        "language": "JavaScript",
+        "description": "The most comprehensive database of Chinese poetry 🧶最全中华古诗词数据库,  唐宋两朝近一万四千古诗人,  接",
+        "reasons": [
+          "AI classification: data-tool — This is a comprehensive Chinese poetry dataset repository organized in JSON format with data processing tools and analysis, not a deployable web service or reusable library."
+        ]
+      },
+      {
+        "full_name": "apache/spark",
+        "stars": 42896,
+        "language": "Scala",
+        "description": "Apache Spark - A unified analytics engine for large-scale data processing",
+        "reasons": [
+          "Data tool: topics=sql"
+        ]
+      }
+    ]
+  }
+}

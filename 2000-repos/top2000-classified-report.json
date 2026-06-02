@@ -1,0 +1,109 @@
+{
+  "generated_at": "2026-02-28T08:45:24Z",
+  "version": "v4-unified",
+  "methodology": "Rule engine + GitHub signal collection + Anthropic API (Haiku/Sonnet)",
+  "summary": {
+    "total_repos": 20,
+    "deployable": 4,
+    "deployable_pct": "20.0%",
+    "not_deployable": 16,
+    "has_dockerfile": 2,
+    "has_compose": 1,
+    "has_docker_any": 2,
+    "no_docker_opportunity": 2
+  },
+  "category_distribution": {
+    "framework-or-library": 15,
+    "backend-service": 3,
+    "mobile-app": 1,
+    "doc-site": 1
+  },
+  "method_distribution": {
+    "heuristic": 13,
+    "rule:deny-list": 6,
+    "rule:mobile-topic": 1
+  },
+  "confidence_distribution": {
+    "low": 9,
+    "high": 10,
+    "medium": 1
+  },
+  "language_breakdown_deployable": {
+    "TypeScript": 1,
+    "Go": 1,
+    "Python": 1,
+    "Java": 1
+  },
+  "top_50_deployable": [
+    {
+      "rank": 3,
+      "full_name": "openclaw/openclaw",
+      "stars": 233697,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "confidence": "high",
+      "classify_method": "heuristic",
+      "has_dockerfile": true,
+      "frameworks": [
+        "node:ws",
+        "node:express"
+      ]
+    },
+    {
+      "rank": 15,
+      "full_name": "ollama/ollama",
+      "stars": 163528,
+      "language": "Go",
+      "category": "backend-service",
+      "confidence": "high",
+      "classify_method": "heuristic",
+      "has_dockerfile": true,
+      "frameworks": [
+        "go:gin"
+      ]
+    },
+    {
+      "rank": 16,
+      "full_name": "AUTOMATIC1111/stable-diffusion-webui",
+      "stars": 161349,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "classify_method": "heuristic",
+      "has_dockerfile": false,
+      "frameworks": [
+        "py:fastapi",
+        "py-ml-serve:gradio"
+      ]
+    },
+    {
+      "rank": 18,
+      "full_name": "Snailclimb/JavaGuide",
+      "stars": 153893,
+      "language": "Java",
+      "category": "doc-site",
+      "confidence": "high",
+      "classify_method": "heuristic",
+      "has_dockerfile": false,
+      "frameworks": [
+        "node-doc:vuepress"
+      ]
+    }
+  ],
+  "deployable_no_docker_top30": [
+    {
+      "full_name": "AUTOMATIC1111/stable-diffusion-webui",
+      "stars": 161349,
+      "language": "Python",
+      "category": "backend-service",
+      "reasoning": "Web framework: ['py:fastapi', 'py-ml-serve:gradio']"
+    },
+    {
+      "full_name": "Snailclimb/JavaGuide",
+      "stars": 153893,
+      "language": "Java",
+      "category": "doc-site",
+      "reasoning": "Doc framework: ['node-doc:vuepress']"
+    }
+  ]
+}

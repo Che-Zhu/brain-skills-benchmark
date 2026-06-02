@@ -1,0 +1,1429 @@
+{
+  "generated_at": "2026-02-27T11:22:14Z",
+  "version": "v3",
+  "methodology": "Framework-level detection via dependency file content (package.json, go.mod, etc.)",
+  "summary": {
+    "total_repos": 2000,
+    "deployable": 504,
+    "deployable_pct": "25.2%",
+    "not_deployable": 1496,
+    "has_dockerfile": 178,
+    "has_dockerfile_pct_of_deployable": "35.3%",
+    "has_compose": 105,
+    "has_compose_pct_of_deployable": "20.8%",
+    "has_docker_any": 206,
+    "has_docker_any_pct_of_deployable": "40.9%",
+    "no_docker_opportunity": 298,
+    "no_docker_opportunity_pct": "59.1%"
+  },
+  "category_distribution": {
+    "unknown": 554,
+    "no-build-system": 474,
+    "backend-service": 315,
+    "library": 196,
+    "framework-or-library": 113,
+    "cli-tool": 73,
+    "fullstack-app": 72,
+    "ml-training": 55,
+    "frontend-app": 51,
+    "doc-site": 45,
+    "desktop-app": 25,
+    "ml-serving": 20,
+    "docs-or-awesome": 3,
+    "mobile-app": 3,
+    "self-hosted-app": 1
+  },
+  "category_docker_breakdown": {
+    "unknown": {
+      "total": 554,
+      "has_dockerfile": 64,
+      "has_compose": 30,
+      "has_docker_any": 76
+    },
+    "framework-or-library": {
+      "total": 113,
+      "has_dockerfile": 3,
+      "has_compose": 3,
+      "has_docker_any": 5
+    },
+    "backend-service": {
+      "total": 315,
+      "has_dockerfile": 131,
+      "has_compose": 72,
+      "has_docker_any": 148
+    },
+    "no-build-system": {
+      "total": 474,
+      "has_dockerfile": 39,
+      "has_compose": 20,
+      "has_docker_any": 50
+    },
+    "fullstack-app": {
+      "total": 72,
+      "has_dockerfile": 20,
+      "has_compose": 18,
+      "has_docker_any": 27
+    },
+    "doc-site": {
+      "total": 45,
+      "has_dockerfile": 9,
+      "has_compose": 5,
+      "has_docker_any": 12
+    },
+    "cli-tool": {
+      "total": 73,
+      "has_dockerfile": 14,
+      "has_compose": 4,
+      "has_docker_any": 16
+    },
+    "docs-or-awesome": {
+      "total": 3,
+      "has_dockerfile": 1,
+      "has_compose": 0,
+      "has_docker_any": 1
+    },
+    "frontend-app": {
+      "total": 51,
+      "has_dockerfile": 15,
+      "has_compose": 7,
+      "has_docker_any": 15
+    },
+    "library": {
+      "total": 196,
+      "has_dockerfile": 16,
+      "has_compose": 9,
+      "has_docker_any": 20
+    },
+    "ml-training": {
+      "total": 55,
+      "has_dockerfile": 3,
+      "has_compose": 4,
+      "has_docker_any": 6
+    },
+    "desktop-app": {
+      "total": 25,
+      "has_dockerfile": 5,
+      "has_compose": 2,
+      "has_docker_any": 5
+    },
+    "ml-serving": {
+      "total": 20,
+      "has_dockerfile": 3,
+      "has_compose": 2,
+      "has_docker_any": 3
+    },
+    "self-hosted-app": {
+      "total": 1,
+      "has_dockerfile": 0,
+      "has_compose": 1,
+      "has_docker_any": 1
+    },
+    "mobile-app": {
+      "total": 3,
+      "has_dockerfile": 1,
+      "has_compose": 0,
+      "has_docker_any": 1
+    }
+  },
+  "confidence_distribution": {
+    "high": 368,
+    "medium": 92,
+    "low": 44
+  },
+  "framework_popularity": {
+    "grpc": 86,
+    "fastapi": 51,
+    "monorepo": 46,
+    "aiohttp": 35,
+    "mux": 33,
+    "express": 31,
+    "gradio": 31,
+    "flask": 27,
+    "ws": 23,
+    "mkdocs": 23,
+    "frontend-spa": 22,
+    "next": 22,
+    "gin": 18,
+    "chi": 15,
+    "django": 15,
+    "starlette": 11,
+    "vitepress": 11,
+    "tornado": 9,
+    "spring-boot-maven-plugin": 8,
+    "httprouter": 7,
+    "puma": 7,
+    "rails": 7,
+    "streamlit": 7,
+    "djangorestframework": 7,
+    "spring-cloud": 7,
+    "socket.io": 6,
+    "echo": 6,
+    "laravel/framework": 6,
+    "vuepress": 5,
+    "javax.servlet": 5,
+    "plotly": 5,
+    "spring-boot-starter-web": 4,
+    "astro": 4,
+    "quarkus": 4,
+    "axum": 4,
+    "quart": 3,
+    "mkdocs-material": 3,
+    "koa": 3,
+    "micronaut": 3,
+    "@nestjs/platform-express": 2,
+    "@nestjs/core": 2,
+    "panel": 2,
+    "unicorn": 2,
+    "hono": 2,
+    "tonic": 2,
+    "nuxt": 2,
+    "@docusaurus/core": 2,
+    "sphinx": 2,
+    "hyper": 2,
+    "dropwizard": 2,
+    "@trpc/server": 1,
+    "rocket": 1,
+    "sinatra": 1,
+    "self-hosted": 1,
+    "nextra": 1,
+    "nextra-theme-docs": 1,
+    "spring-boot-gradle-plugin": 1,
+    "pelican": 1,
+    "actix-web": 1,
+    "@remix-run/node": 1,
+    "grape": 1,
+    "symfony/http-kernel": 1,
+    "spring-boot-starter-data": 1,
+    "warp": 1,
+    "sanic": 1,
+    "fastify": 1,
+    "@hapi/hapi": 1
+  },
+  "language_breakdown_deployable": {
+    "Python": {
+      "total": 128,
+      "has_dockerfile": 55,
+      "has_compose": 36,
+      "has_docker_any": 62
+    },
+    "TypeScript": {
+      "total": 118,
+      "has_dockerfile": 30,
+      "has_compose": 33,
+      "has_docker_any": 40
+    },
+    "Go": {
+      "total": 100,
+      "has_dockerfile": 50,
+      "has_compose": 13,
+      "has_docker_any": 53
+    },
+    "JavaScript": {
+      "total": 55,
+      "has_dockerfile": 16,
+      "has_compose": 7,
+      "has_docker_any": 18
+    },
+    "Java": {
+      "total": 26,
+      "has_dockerfile": 3,
+      "has_compose": 2,
+      "has_docker_any": 3
+    },
+    "PHP": {
+      "total": 14,
+      "has_dockerfile": 2,
+      "has_compose": 5,
+      "has_docker_any": 6
+    },
+    "Rust": {
+      "total": 12,
+      "has_dockerfile": 5,
+      "has_compose": 1,
+      "has_docker_any": 5
+    },
+    "Jupyter Notebook": {
+      "total": 10,
+      "has_dockerfile": 1,
+      "has_compose": 1,
+      "has_docker_any": 1
+    },
+    "Vue": {
+      "total": 10,
+      "has_dockerfile": 5,
+      "has_compose": 1,
+      "has_docker_any": 5
+    },
+    "Ruby": {
+      "total": 9,
+      "has_dockerfile": 3,
+      "has_compose": 4,
+      "has_docker_any": 5
+    },
+    "HTML": {
+      "total": 5,
+      "has_dockerfile": 2,
+      "has_compose": 2,
+      "has_docker_any": 2
+    },
+    "C++": {
+      "total": 5,
+      "has_dockerfile": 1,
+      "has_compose": 0,
+      "has_docker_any": 1
+    },
+    "CSS": {
+      "total": 3,
+      "has_dockerfile": 1,
+      "has_compose": 0,
+      "has_docker_any": 1
+    },
+    "Kotlin": {
+      "total": 2,
+      "has_dockerfile": 0,
+      "has_compose": 0,
+      "has_docker_any": 0
+    },
+    "MDX": {
+      "total": 2,
+      "has_dockerfile": 1,
+      "has_compose": 0,
+      "has_docker_any": 1
+    },
+    "Clojure": {
+      "total": 1,
+      "has_dockerfile": 1,
+      "has_compose": 0,
+      "has_docker_any": 1
+    },
+    "Nunjucks": {
+      "total": 1,
+      "has_dockerfile": 0,
+      "has_compose": 0,
+      "has_docker_any": 0
+    },
+    "Svelte": {
+      "total": 1,
+      "has_dockerfile": 1,
+      "has_compose": 0,
+      "has_docker_any": 1
+    },
+    "Shell": {
+      "total": 1,
+      "has_dockerfile": 0,
+      "has_compose": 0,
+      "has_docker_any": 0
+    },
+    "Mustache": {
+      "total": 1,
+      "has_dockerfile": 1,
+      "has_compose": 0,
+      "has_docker_any": 1
+    }
+  },
+  "not_deployable_breakdown": {
+    "unknown": 554,
+    "no-build-system": 474,
+    "library": 196,
+    "framework-or-library": 113,
+    "cli-tool": 73,
+    "ml-training": 55,
+    "desktop-app": 25,
+    "docs-or-awesome": 3,
+    "mobile-app": 3
+  },
+  "top_50_deployable": [
+    {
+      "rank": 3,
+      "full_name": "openclaw/openclaw",
+      "stars": 233697,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": true,
+      "frameworks": [
+        "ws",
+        "express"
+      ]
+    },
+    {
+      "rank": 11,
+      "full_name": "n8n-io/n8n",
+      "stars": 176583,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "confidence": "medium",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "monorepo"
+      ]
+    },
+    {
+      "rank": 15,
+      "full_name": "ollama/ollama",
+      "stars": 163528,
+      "language": "Go",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "gin"
+      ]
+    },
+    {
+      "rank": 16,
+      "full_name": "AUTOMATIC1111/stable-diffusion-webui",
+      "stars": 161349,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "fastapi",
+        "gradio"
+      ]
+    },
+    {
+      "rank": 18,
+      "full_name": "Snailclimb/JavaGuide",
+      "stars": 153893,
+      "language": "Java",
+      "category": "doc-site",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "vuepress"
+      ]
+    },
+    {
+      "rank": 32,
+      "full_name": "open-webui/open-webui",
+      "stars": 125082,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": true,
+      "frameworks": [
+        "aiohttp",
+        "fastapi"
+      ]
+    },
+    {
+      "rank": 35,
+      "full_name": "excalidraw/excalidraw",
+      "stars": 117603,
+      "language": "TypeScript",
+      "category": "frontend-app",
+      "confidence": "low",
+      "has_dockerfile": true,
+      "has_compose": true,
+      "frameworks": []
+    },
+    {
+      "rank": 51,
+      "full_name": "fatedier/frp",
+      "stars": 104702,
+      "language": "Go",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "mux"
+      ]
+    },
+    {
+      "rank": 52,
+      "full_name": "Comfy-Org/ComfyUI",
+      "stars": 104326,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "aiohttp"
+      ]
+    },
+    {
+      "rank": 58,
+      "full_name": "clash-verge-rev/clash-verge-rev",
+      "stars": 99008,
+      "language": "TypeScript",
+      "category": "frontend-app",
+      "confidence": "medium",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "frontend-spa"
+      ]
+    },
+    {
+      "rank": 60,
+      "full_name": "supabase/supabase",
+      "stars": 98232,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "confidence": "medium",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "monorepo"
+      ]
+    },
+    {
+      "rank": 68,
+      "full_name": "fastapi/fastapi",
+      "stars": 95627,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "starlette"
+      ]
+    },
+    {
+      "rank": 74,
+      "full_name": "immich-app/immich",
+      "stars": 93606,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "confidence": "medium",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "monorepo"
+      ]
+    },
+    {
+      "rank": 82,
+      "full_name": "ChatGPTNextWeb/NextChat",
+      "stars": 87387,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": true,
+      "frameworks": [
+        "next"
+      ]
+    },
+    {
+      "rank": 84,
+      "full_name": "gohugoio/hugo",
+      "stars": 86805,
+      "language": "Go",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "grpc"
+      ]
+    },
+    {
+      "rank": 90,
+      "full_name": "home-assistant/core",
+      "stars": 85027,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "aiohttp"
+      ]
+    },
+    {
+      "rank": 94,
+      "full_name": "louislam/uptime-kuma",
+      "stars": 83328,
+      "language": "JavaScript",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": true,
+      "frameworks": [
+        "socket.io",
+        "ws",
+        "express"
+      ]
+    },
+    {
+      "rank": 96,
+      "full_name": "macrozheng/mall",
+      "stars": 82971,
+      "language": "Java",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "spring-boot-maven-plugin"
+      ]
+    },
+    {
+      "rank": 100,
+      "full_name": "syncthing/syncthing",
+      "stars": 80352,
+      "language": "Go",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "httprouter"
+      ]
+    },
+    {
+      "rank": 102,
+      "full_name": "astral-sh/uv",
+      "stars": 79902,
+      "language": "Rust",
+      "category": "doc-site",
+      "confidence": "medium",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "mkdocs"
+      ]
+    },
+    {
+      "rank": 106,
+      "full_name": "browser-use/browser-use",
+      "stars": 79078,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "aiohttp"
+      ]
+    },
+    {
+      "rank": 107,
+      "full_name": "doocs/advanced-java",
+      "stars": 78856,
+      "language": "Java",
+      "category": "doc-site",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "vitepress"
+      ]
+    },
+    {
+      "rank": 117,
+      "full_name": "coder/code-server",
+      "stars": 76389,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "ws",
+        "express"
+      ]
+    },
+    {
+      "rank": 125,
+      "full_name": "Stirling-Tools/Stirling-PDF",
+      "stars": 74601,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "spring-boot-starter-web"
+      ]
+    },
+    {
+      "rank": 127,
+      "full_name": "infiniflow/ragflow",
+      "stars": 73799,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "quart"
+      ]
+    },
+    {
+      "rank": 132,
+      "full_name": "lobehub/lobehub",
+      "stars": 72711,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "@trpc/server",
+        "ws",
+        "next"
+      ]
+    },
+    {
+      "rank": 135,
+      "full_name": "grafana/grafana",
+      "stars": 72401,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "confidence": "medium",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "monorepo"
+      ]
+    },
+    {
+      "rank": 141,
+      "full_name": "PKUFlyingPig/cs-self-learning",
+      "stars": 71459,
+      "language": "HTML",
+      "category": "doc-site",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "mkdocs-material"
+      ]
+    },
+    {
+      "rank": 142,
+      "full_name": "moby/moby",
+      "stars": 71447,
+      "language": "Go",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "mux",
+        "grpc"
+      ]
+    },
+    {
+      "rank": 148,
+      "full_name": "apache/superset",
+      "stars": 70705,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": true,
+      "frameworks": [
+        "flask"
+      ]
+    },
+    {
+      "rank": 150,
+      "full_name": "hakimel/reveal.js",
+      "stars": 70628,
+      "language": "JavaScript",
+      "category": "frontend-app",
+      "confidence": "low",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": []
+    },
+    {
+      "rank": 152,
+      "full_name": "caddyserver/caddy",
+      "stars": 70423,
+      "language": "Go",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "chi",
+        "grpc",
+        "grpc"
+      ]
+    },
+    {
+      "rank": 153,
+      "full_name": "binary-husky/gpt_academic",
+      "stars": 70124,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": true,
+      "frameworks": [
+        "fastapi"
+      ]
+    },
+    {
+      "rank": 157,
+      "full_name": "nektos/act",
+      "stars": 69005,
+      "language": "Go",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "httprouter"
+      ]
+    },
+    {
+      "rank": 161,
+      "full_name": "OpenHands/OpenHands",
+      "stars": 68240,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": true,
+      "frameworks": [
+        "aiohttp",
+        "tornado",
+        "starlette",
+        "fastapi"
+      ]
+    },
+    {
+      "rank": 163,
+      "full_name": "hiyouga/LlamaFactory",
+      "stars": 67617,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "fastapi",
+        "gradio"
+      ]
+    },
+    {
+      "rank": 170,
+      "full_name": "xtekky/gpt4free",
+      "stars": 65688,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": true,
+      "frameworks": [
+        "flask",
+        "aiohttp",
+        "fastapi"
+      ]
+    },
+    {
+      "rank": 177,
+      "full_name": "FoundationAgents/MetaGPT",
+      "stars": 64523,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "aiohttp"
+      ]
+    },
+    {
+      "rank": 182,
+      "full_name": "prometheus/prometheus",
+      "stars": 62952,
+      "language": "Go",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "grpc",
+        "httprouter"
+      ]
+    },
+    {
+      "rank": 186,
+      "full_name": "openinterpreter/open-interpreter",
+      "stars": 62426,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "starlette",
+        "fastapi"
+      ]
+    },
+    {
+      "rank": 187,
+      "full_name": "nocodb/nocodb",
+      "stars": 62246,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "confidence": "medium",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "monorepo"
+      ]
+    },
+    {
+      "rank": 191,
+      "full_name": "traefik/traefik",
+      "stars": 61933,
+      "language": "Go",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "mux",
+        "grpc",
+        "gin"
+      ]
+    },
+    {
+      "rank": 197,
+      "full_name": "unclecode/crawl4ai",
+      "stars": 61059,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": true,
+      "frameworks": [
+        "aiohttp"
+      ]
+    },
+    {
+      "rank": 199,
+      "full_name": "daytonaio/daytona",
+      "stars": 60891,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "@nestjs/platform-express",
+        "express",
+        "@nestjs/core",
+        "astro"
+      ]
+    },
+    {
+      "rank": 201,
+      "full_name": "minio/minio",
+      "stars": 60390,
+      "language": "Go",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": true,
+      "has_compose": false,
+      "frameworks": [
+        "mux",
+        "grpc"
+      ]
+    },
+    {
+      "rank": 204,
+      "full_name": "commaai/openpilot",
+      "stars": 60171,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "aiohttp"
+      ]
+    },
+    {
+      "rank": 207,
+      "full_name": "jquery/jquery",
+      "stars": 59850,
+      "language": "JavaScript",
+      "category": "frontend-app",
+      "confidence": "low",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": []
+    },
+    {
+      "rank": 210,
+      "full_name": "pathwaycom/pathway",
+      "stars": 59596,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "aiohttp",
+        "fastapi",
+        "panel"
+      ]
+    },
+    {
+      "rank": 226,
+      "full_name": "usememos/memos",
+      "stars": 57280,
+      "language": "Go",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": false,
+      "frameworks": [
+        "echo",
+        "grpc"
+      ]
+    },
+    {
+      "rank": 229,
+      "full_name": "zylon-ai/private-gpt",
+      "stars": 57132,
+      "language": "Python",
+      "category": "backend-service",
+      "confidence": "high",
+      "has_dockerfile": false,
+      "has_compose": true,
+      "frameworks": [
+        "fastapi",
+        "gradio"
+      ]
+    }
+  ],
+  "deployable_without_docker_top30": [
+    {
+      "rank": 11,
+      "full_name": "n8n-io/n8n",
+      "stars": 176583,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "frameworks": [
+        "monorepo"
+      ],
+      "reasons": [
+        "Has docker-related npm scripts",
+        "Self-hosted/docker topic"
+      ]
+    },
+    {
+      "rank": 16,
+      "full_name": "AUTOMATIC1111/stable-diffusion-webui",
+      "stars": 161349,
+      "language": "Python",
+      "category": "backend-service",
+      "frameworks": [
+        "fastapi",
+        "gradio"
+      ],
+      "reasons": [
+        "Python web framework: fastapi",
+        "Python ML serving: gradio"
+      ]
+    },
+    {
+      "rank": 18,
+      "full_name": "Snailclimb/JavaGuide",
+      "stars": 153893,
+      "language": "Java",
+      "category": "doc-site",
+      "frameworks": [
+        "vuepress"
+      ],
+      "reasons": [
+        "Doc framework: vuepress"
+      ]
+    },
+    {
+      "rank": 51,
+      "full_name": "fatedier/frp",
+      "stars": 104702,
+      "language": "Go",
+      "category": "backend-service",
+      "frameworks": [
+        "mux"
+      ],
+      "reasons": [
+        "Go web framework: github.com/gorilla/mux"
+      ]
+    },
+    {
+      "rank": 52,
+      "full_name": "Comfy-Org/ComfyUI",
+      "stars": 104326,
+      "language": "Python",
+      "category": "backend-service",
+      "frameworks": [
+        "aiohttp"
+      ],
+      "reasons": [
+        "Python web framework: aiohttp"
+      ]
+    },
+    {
+      "rank": 58,
+      "full_name": "clash-verge-rev/clash-verge-rev",
+      "stars": 99008,
+      "language": "TypeScript",
+      "category": "frontend-app",
+      "frameworks": [
+        "frontend-spa"
+      ],
+      "reasons": [
+        "Frontend app: framework + bundler + build script, no library fields"
+      ]
+    },
+    {
+      "rank": 60,
+      "full_name": "supabase/supabase",
+      "stars": 98232,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "frameworks": [
+        "monorepo"
+      ],
+      "reasons": [
+        "Monorepo with apps/ directory"
+      ]
+    },
+    {
+      "rank": 68,
+      "full_name": "fastapi/fastapi",
+      "stars": 95627,
+      "language": "Python",
+      "category": "backend-service",
+      "frameworks": [
+        "starlette"
+      ],
+      "reasons": [
+        "Python web framework: starlette"
+      ]
+    },
+    {
+      "rank": 74,
+      "full_name": "immich-app/immich",
+      "stars": 93606,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "frameworks": [
+        "monorepo"
+      ],
+      "reasons": [
+        "Self-hosted/docker topic"
+      ]
+    },
+    {
+      "rank": 96,
+      "full_name": "macrozheng/mall",
+      "stars": 82971,
+      "language": "Java",
+      "category": "backend-service",
+      "frameworks": [
+        "spring-boot-maven-plugin"
+      ],
+      "reasons": [
+        "Java web: spring-boot-maven-plugin"
+      ]
+    },
+    {
+      "rank": 107,
+      "full_name": "doocs/advanced-java",
+      "stars": 78856,
+      "language": "Java",
+      "category": "doc-site",
+      "frameworks": [
+        "vitepress"
+      ],
+      "reasons": [
+        "Doc framework: vitepress"
+      ]
+    },
+    {
+      "rank": 117,
+      "full_name": "coder/code-server",
+      "stars": 76389,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "frameworks": [
+        "ws",
+        "express"
+      ],
+      "reasons": [
+        "Backend framework: ws",
+        "Backend framework: express"
+      ]
+    },
+    {
+      "rank": 125,
+      "full_name": "Stirling-Tools/Stirling-PDF",
+      "stars": 74601,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "frameworks": [
+        "spring-boot-starter-web"
+      ],
+      "reasons": [
+        "Java web: spring-boot-starter-web"
+      ]
+    },
+    {
+      "rank": 141,
+      "full_name": "PKUFlyingPig/cs-self-learning",
+      "stars": 71459,
+      "language": "HTML",
+      "category": "doc-site",
+      "frameworks": [
+        "mkdocs-material"
+      ],
+      "reasons": [
+        "Python doc generator: mkdocs-material"
+      ]
+    },
+    {
+      "rank": 150,
+      "full_name": "hakimel/reveal.js",
+      "stars": 70628,
+      "language": "JavaScript",
+      "category": "frontend-app",
+      "frameworks": [],
+      "reasons": [
+        "Has start + build scripts"
+      ]
+    },
+    {
+      "rank": 152,
+      "full_name": "caddyserver/caddy",
+      "stars": 70423,
+      "language": "Go",
+      "category": "backend-service",
+      "frameworks": [
+        "chi",
+        "grpc",
+        "grpc"
+      ],
+      "reasons": [
+        "Go web framework: github.com/go-chi/chi",
+        "Go DB driver: github.com/jackc/pgx",
+        "Go web framework: google.golang.org/grpc",
+        "Go DB driver: github.com/go-sql-driver/mysql",
+        "Go web framework: google.golang.org/grpc"
+      ]
+    },
+    {
+      "rank": 157,
+      "full_name": "nektos/act",
+      "stars": 69005,
+      "language": "Go",
+      "category": "backend-service",
+      "frameworks": [
+        "httprouter"
+      ],
+      "reasons": [
+        "Go web framework: github.com/julienschmidt/httprouter"
+      ]
+    },
+    {
+      "rank": 163,
+      "full_name": "hiyouga/LlamaFactory",
+      "stars": 67617,
+      "language": "Python",
+      "category": "backend-service",
+      "frameworks": [
+        "fastapi",
+        "gradio"
+      ],
+      "reasons": [
+        "Python web framework: fastapi",
+        "Python WSGI/ASGI server: uvicorn",
+        "Python ML serving: gradio"
+      ]
+    },
+    {
+      "rank": 187,
+      "full_name": "nocodb/nocodb",
+      "stars": 62246,
+      "language": "TypeScript",
+      "category": "fullstack-app",
+      "frameworks": [
+        "monorepo"
+      ],
+      "reasons": [
+        "Has docker-related npm scripts"
+      ]
+    },
+    {
+      "rank": 199,
+      "full_name": "daytonaio/daytona",
+      "stars": 60891,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "frameworks": [
+        "@nestjs/platform-express",
+        "express",
+        "@nestjs/core",
+        "astro"
+      ],
+      "reasons": [
+        "Backend framework: @nestjs/platform-express",
+        "Backend framework: express",
+        "Backend framework: @nestjs/core",
+        "Doc framework: astro"
+      ]
+    },
+    {
+      "rank": 204,
+      "full_name": "commaai/openpilot",
+      "stars": 60171,
+      "language": "Python",
+      "category": "backend-service",
+      "frameworks": [
+        "aiohttp"
+      ],
+      "reasons": [
+        "Python web framework: aiohttp"
+      ]
+    },
+    {
+      "rank": 207,
+      "full_name": "jquery/jquery",
+      "stars": 59850,
+      "language": "JavaScript",
+      "category": "frontend-app",
+      "frameworks": [],
+      "reasons": [
+        "Has start + build scripts"
+      ]
+    },
+    {
+      "rank": 210,
+      "full_name": "pathwaycom/pathway",
+      "stars": 59596,
+      "language": "Python",
+      "category": "backend-service",
+      "frameworks": [
+        "aiohttp",
+        "fastapi",
+        "panel"
+      ],
+      "reasons": [
+        "Python web framework: aiohttp",
+        "Python web framework: fastapi",
+        "Python WSGI/ASGI server: uvicorn",
+        "Python ML serving: panel"
+      ]
+    },
+    {
+      "rank": 226,
+      "full_name": "usememos/memos",
+      "stars": 57280,
+      "language": "Go",
+      "category": "backend-service",
+      "frameworks": [
+        "echo",
+        "grpc"
+      ],
+      "reasons": [
+        "Go DB driver: github.com/go-sql-driver/mysql",
+        "Go web framework: github.com/labstack/echo",
+        "Go DB driver: github.com/lib/pq",
+        "Go web framework: google.golang.org/grpc"
+      ]
+    },
+    {
+      "rank": 278,
+      "full_name": "TryGhost/Ghost",
+      "stars": 51918,
+      "language": "JavaScript",
+      "category": "fullstack-app",
+      "frameworks": [
+        "monorepo"
+      ],
+      "reasons": [
+        "Monorepo with apps/ directory",
+        "Has docker-related npm scripts"
+      ]
+    },
+    {
+      "rank": 287,
+      "full_name": "microsoft/ai-agents-for-beginners",
+      "stars": 51396,
+      "language": "Jupyter Notebook",
+      "category": "backend-service",
+      "frameworks": [],
+      "reasons": [
+        "Python WSGI/ASGI server: uvicorn"
+      ]
+    },
+    {
+      "rank": 293,
+      "full_name": "agalwood/Motrix",
+      "stars": 50909,
+      "language": "JavaScript",
+      "category": "backend-service",
+      "frameworks": [
+        "ws"
+      ],
+      "reasons": [
+        "Backend framework: ws"
+      ]
+    },
+    {
+      "rank": 306,
+      "full_name": "lyswhut/lx-music-desktop",
+      "stars": 49023,
+      "language": "TypeScript",
+      "category": "backend-service",
+      "frameworks": [
+        "ws"
+      ],
+      "reasons": [
+        "Backend framework: ws"
+      ]
+    },
+    {
+      "rank": 310,
+      "full_name": "huginn/huginn",
+      "stars": 48774,
+      "language": "Ruby",
+      "category": "backend-service",
+      "frameworks": [
+        "unicorn",
+        "puma",
+        "rails"
+      ],
+      "reasons": [
+        "Ruby web: unicorn",
+        "Ruby web: puma",
+        "Ruby web: rails",
+        "config.ru found (Rack app)"
+      ]
+    },
+    {
+      "rank": 315,
+      "full_name": "algorithm-visualizer/algorithm-visualizer",
+      "stars": 48366,
+      "language": "JavaScript",
+      "category": "frontend-app",
+      "frameworks": [],
+      "reasons": [
+        "Has start + build scripts"
+      ]
+    }
+  ]
+}
