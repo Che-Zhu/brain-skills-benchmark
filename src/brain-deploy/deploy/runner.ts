@@ -88,12 +88,8 @@ function compactEnvValue(value: string | undefined): string | null {
 
 function codexGatewayEnv(): Record<string, string> {
   const env: Record<string, string> = {};
-  const apiKey =
-    compactEnvValue(process.env.CODEX_GATEWAY_OPENAI_API_KEY) ??
-    compactEnvValue(process.env.SYSTEM_OPENAI_API_KEY);
-  const baseUrl =
-    compactEnvValue(process.env.CODEX_GATEWAY_OPENAI_BASE_URL) ??
-    compactEnvValue(process.env.SYSTEM_OPENAI_API_BASE_URL);
+  const apiKey = compactEnvValue(process.env.CODEX_GATEWAY_OPENAI_API_KEY);
+  const baseUrl = compactEnvValue(process.env.CODEX_GATEWAY_OPENAI_BASE_URL);
   const model =
     compactEnvValue(process.env.CODEX_GATEWAY_MODEL) ?? DEPLOY_GATEWAY_MODEL;
 

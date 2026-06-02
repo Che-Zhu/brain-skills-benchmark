@@ -13,11 +13,12 @@ const [, , command, ...rest] = process.argv;
 
 function usage() {
   console.error(`用法:
-  brain-skills-benchmark deploy run --namespace <ns> --repo <owner/repo|url> --project-name <name> [--branch <branch>]
   brain-skills-benchmark validate [--profile contract|full] <workspace>
   brain-skills-benchmark suite [--profile contract|full]
   brain-skills-benchmark cases list
-  brain-skills-benchmark cases sync`);
+  brain-skills-benchmark cases sync
+
+端到端跑测请使用: npm run deploy -- --namespace <ns> --repo <owner/repo> --project-name <name>`);
 }
 
 function parseProfile(args) {
@@ -33,26 +34,6 @@ function parseProfile(args) {
     (_, index) => index !== profileIndex && index !== profileIndex + 1
   );
   return { profile, positional };
-}
-
-async function cmdDeployRun(args) {
-  const runScript = path.join(REPO_ROOT, "src/brain-deploy/deploy/run.ts");
-  const tsxBin = path.join(REPO_ROOT, "node_modules", "tsx", "dist", "cli.mjs");
-  const runner = fs.existsSync(tsxBin) ? process.execPath : "npx";
-  const runnerArgs = fs.existsSync(tsxBin)
-    ? [tsxBin, runScript, ...args]
-    : ["tsx", runScript, ...args];
-
-  await new Promise((resolve, reject) => {
-    const child = spawn(runner, runnerArgs, {
-      cwd: REPO_ROOT,
-      env: process.env,
-      stdio: "inherit",
-    });
-    child.on("exit", (code) =>
-      code === 0 ? resolve() : reject(new Error(`deploy 退出码 ${code}`))
-    );
-  });
 }
 
 async function cmdValidate(args) {
@@ -96,11 +77,6 @@ async function main() {
   if (!command) {
     usage();
     process.exit(1);
-  }
-
-  if (command === "deploy" && rest[0] === "run") {
-    await cmdDeployRun(rest.slice(1));
-    return;
   }
 
   if (command === "validate") {

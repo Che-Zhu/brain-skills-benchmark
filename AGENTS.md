@@ -2,26 +2,24 @@
 
 ## 项目
 
-**sealos-deploy** 的自动化 benchmark：端到端部署（Devbox + deploy task + Codex）与离线契约验证。不启动 Brain UI。
+**sealos-deploy** skill 的质量 benchmark：本机 CLI 驱动 Sealos Devbox 端到端跑测（克隆 → Gateway `/sealos-deploy` → apply），在本机 `.data/deploy-tasks/` 记录 **Token、耗时、成功率**。无第二条「离线跑 skill」产品路径。不启动 Brain UI。
 
 ## 命令
 
-- `npm run deploy -- --namespace <ns> --repo <owner/repo> --project-name <name>` — 完整自动化部署
-- `npm test` — fixture 契约套件
-- `npm run validate -- <workspace>` — 验证 `.sealos` 工作区
-- `npm run suite` — 验证 `fixtures/*`
-- `npm run cases:sync` — 从 brain-sandbox-skills 同步 eval 列表
-- `npm run fixtures:generate` — 用 skill 脚本重建 fixture
+- `npm run deploy -- --namespace <ns> --repo <owner/repo> --project-name <name>` — **唯一跑测入口**
+- `npm run cases:sync` — 从 skill 仓库同步 `cases/manifest.json`
+- `npm run benchmark -- cases list` — 列出 manifest 用例
+
+维护本仓库（非产品路径）：`npm test`、`npm run validate`、`npm run suite`、`npm run fixtures:generate`。
 
 ## 环境
 
-复制 `.env.example` 为 `.env`。必填通常包括：`SEALOS_HOST`、`DEVBOX_*`、`GITHUB_TOKEN`、`CODEX_GATEWAY_OPENAI_API_KEY`、`BRAIN_SANDBOX_SKILLS_GIT`。
+复制 `.env.example` 为 `.env`。跑测必填通常包括：`SEALOS_HOST`、`DEVBOX_*`、`GITHUB_TOKEN`、`CODEX_GATEWAY_OPENAI_API_KEY`、`BRAIN_SANDBOX_SKILLS_GIT`。
 
 ## 代码边界
 
-- `src/brain-deploy/` — 与 Brain `apps/ui` deploy 流水线对齐（tsx 运行）
-- `src/lib/`、`fixtures/` — 仅契约验证，不连 Devbox
-- 改 runner/gateway 时与 brain 主仓 diff 同步
+- `src/brain-deploy/` — Devbox 跑测流水线；与 Brain `apps/ui` deploy 对齐，改 runner/gateway 时 diff 主仓
+- `src/lib/`、`fixtures/`、`validate`/`suite` — 仅本仓库契约回归与 golden，不参与 Devbox 跑测主路径
 
 ## 文档
 

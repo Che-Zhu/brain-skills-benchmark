@@ -2,7 +2,7 @@
   "name": "brain-skills-benchmark",
   "version": "0.2.0",
   "private": true,
-  "description": "sealos-deploy 自动化部署与契约验证（无 Brain UI）",
+  "description": "sealos-deploy skill 批量 Devbox 跑测：Token/耗时/成功率（无 Brain UI）",
   "type": "module",
   "bin": {
     "brain-skills-benchmark": "./bin/benchmark.mjs"

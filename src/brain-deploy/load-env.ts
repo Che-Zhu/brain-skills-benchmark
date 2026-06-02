@@ -57,11 +57,8 @@ export function getBrainSandboxSkillsGit(): string {
   return configured;
 }
 
-/** 从仓库根目录加载 `.env` / `.env.local`（不覆盖已存在的环境变量）。 */
+/** 从本仓库根目录加载 `.env` / `.env.local`（不覆盖已存在的环境变量）。 */
 export function loadBenchmarkEnv(): void {
   loadFile(path.join(REPO_ROOT, ".env"));
   loadFile(path.join(REPO_ROOT, ".env.local"));
-
-  const brainUiEnv = path.join(REPO_ROOT, "..", "brain", "apps", "ui", ".env.local");
-  loadFile(brainUiEnv);
 }
