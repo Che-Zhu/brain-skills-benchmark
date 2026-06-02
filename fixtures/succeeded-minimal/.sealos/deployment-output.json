@@ -1,0 +1,109 @@
+{
+  "apiVersion": "brain.skills.sh/v1alpha1",
+  "kind": "GitHubDeployResponse",
+  "status": "succeeded",
+  "mode": "deployable",
+  "message": "Image built and Brain templates generated",
+  "error": null,
+  "source": {
+    "repository": "https://github.com/example/my-app",
+    "branch": "main",
+    "commit": "abcdef1234567890abcdef1234567890abcdef12"
+  },
+  "image": {
+    "ref": "ghcr.io/example/my-app:prepare-abcdef1",
+    "digest": null
+  },
+  "templates": [
+    {
+      "id": "ap:web",
+      "role": "application",
+      "apiVersion": "example.crossplane.io/v1",
+      "kind": "AP",
+      "name": "my-app",
+      "namespace": "apps",
+      "action": "apply",
+      "dependsOn": [],
+      "manifest": {
+        "apiVersion": "example.crossplane.io/v1",
+        "kind": "AP",
+        "metadata": {
+          "name": "my-app",
+          "namespace": "apps",
+          "labels": {
+            "region": "example.com"
+          }
+        },
+        "spec": {
+          "crossplane": {
+            "compositionRef": {
+              "name": "aps-deployment-ingress-go-templating"
+            }
+          },
+          "name": "my-app",
+          "input": {
+            "image": "ghcr.io/example/my-app:prepare-abcdef1",
+            "imagePullPolicy": "Always",
+            "network": {
+              "privatePort": 3000,
+              "platformAddresses": [
+                {
+                  "id": "pa_2d4ffba83fd9",
+                  "port": 3000
+                }
+              ]
+            },
+            "probes": {
+              "startup": {
+                "httpGet": {
+                  "path": "/",
+                  "port": 3000
+                },
+                "failureThreshold": 30
+              },
+              "liveness": {
+                "httpGet": {
+                  "path": "/",
+                  "port": 3000
+                },
+                "initialDelaySeconds": 15,
+                "failureThreshold": 3
+              },
+              "readiness": {
+                "httpGet": {
+                  "path": "/",
+                  "port": 3000
+                },
+                "initialDelaySeconds": 5,
+                "failureThreshold": 3
+              }
+            }
+          },
+          "resource": {
+            "replicaStrategy": {
+              "type": "fixed",
+              "fixed": {
+                "replicas": 1
+              }
+            },
+            "requests": {
+              "cpu": "200m",
+              "memory": "204Mi"
+            },
+            "limits": {
+              "cpu": "2000m",
+              "memory": "2048Mi"
+            }
+          },
+          "projectName": "my-app"
+        }
+      }
+    }
+  ],
+  "applyOrder": [
+    "ap:web"
+  ],
+  "bindings": [],
+  "unresolvedInputs": [],
+  "warnings": []
+}

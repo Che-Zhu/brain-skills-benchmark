@@ -1,0 +1,22 @@
+{
+  "apiVersion": "brain.skills.sh/v1alpha1",
+  "kind": "GitHubDeployResponse",
+  "status": "failed",
+  "mode": "unsupported",
+  "message": "Repository is not suitable for Brain deployment",
+  "error": "sharkdp/bat is a CLI tool without a long-running HTTP server; deployment stopped before GHCR push.",
+  "source": {
+    "repository": "https://github.com/sharkdp/bat",
+    "branch": "master",
+    "commit": null
+  },
+  "image": {
+    "ref": null,
+    "digest": null
+  },
+  "templates": [],
+  "applyOrder": [],
+  "bindings": [],
+  "unresolvedInputs": [],
+  "warnings": []
+}
