@@ -13,12 +13,12 @@ import {
   getDevboxPauseAt,
 } from "./config.mjs";
 
-function requireGatewayApiKey() {
-  const key = process.env.CODEX_GATEWAY_OPENAI_API_KEY?.trim();
-  if (!key) {
-    throw new Error("Missing required environment variable: CODEX_GATEWAY_OPENAI_API_KEY");
+function requiredEnv(name) {
+  const value = process.env[name]?.trim();
+  if (!value) {
+    throw new Error(`Missing required environment variable: ${name}`);
   }
-  return key;
+  return value;
 }
 
 export function buildCreateDevboxInput(ctx) {
@@ -34,7 +34,8 @@ export function buildCreateDevboxInput(ctx) {
     CODEX_GATEWAY_MODEL: getCodexGatewayModel(),
     CODEX_GATEWAY_CODEX_HOME: DEFAULT_CODEX_GATEWAY_CODEX_HOME,
     CODEX_GATEWAY_SESSION_TTL_MS: getCodexGatewaySessionTtlMs(),
-    CODEX_GATEWAY_OPENAI_API_KEY: requireGatewayApiKey(),
+    CODEX_GATEWAY_OPENAI_API_KEY: requiredEnv("CODEX_GATEWAY_OPENAI_API_KEY"),
+    GITHUB_TOKEN: requiredEnv("GITHUB_TOKEN"),
     REPO_URL: ctx.repoUrl,
   };
 

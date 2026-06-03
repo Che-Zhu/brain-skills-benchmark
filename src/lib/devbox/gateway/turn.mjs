@@ -6,6 +6,11 @@ import {
 } from "./completion.mjs";
 import { buildBenchmarkSkillPrompt } from "./prompt.mjs";
 import { ensureGatewaySession } from "./session.mjs";
+import {
+  getLatestAssistantSnippetText,
+  logGatewayTranscript,
+  logLatestAssistantSnippet,
+} from "./transcript-log.mjs";
 
 const DEFAULT_POLL_MS = 10_000;
 const DEFAULT_TURN_TIMEOUT_MS = 30 * 60 * 1000;
@@ -47,6 +52,7 @@ async function waitForTurnTerminal(
 ) {
   const deadline = Date.now() + timeoutMs;
   let lastStatus = null;
+  let lastAssistantSnippet = null;
 
   while (Date.now() < deadline) {
     const session = await getCodexGatewaySessionState(
@@ -64,6 +70,19 @@ async function waitForTurnTerminal(
     console.info(
       `[gateway] turn polling activeTurn=${Boolean(activeTurn)} lastTurnStatus=${lastTurnStatus ?? "none"}`,
     );
+
+    const snippet = getLatestAssistantSnippetText(session.state?.transcript);
+    if (snippet !== lastAssistantSnippet) {
+      if (snippet) {
+        logLatestAssistantSnippet(session.state?.transcript, {
+          prefix: "turn polling",
+        });
+      } else if (lastAssistantSnippet === null) {
+        console.info("[gateway] turn polling: (no assistant message yet)");
+      }
+      lastAssistantSnippet = snippet;
+    }
+
     await sleep(pollMs);
   }
 
@@ -112,6 +131,25 @@ export async function runSkillTurn(ctx) {
   console.info(
     `[gateway] turn done ${fullName} lastTurnStatus=${lastTurnStatus}`,
   );
+
+  logGatewayTranscript(finalSession.state?.transcript, {
+    label: `${fullName} ${lastTurnStatus ?? "unknown"}`,
+  });
+
+  if (finalSession.state?.recentEvents?.length) {
+    console.info(
+      `[gateway] recentEvents (${finalSession.state.recentEvents.length}):`,
+    );
+    for (const event of finalSession.state.recentEvents.slice(-10)) {
+      console.info(
+        `[gateway]   ${event.at ?? ""} ${event.type ?? ""} ${event.textPreview ?? ""}`.trim(),
+      );
+    }
+  }
+
+  ctx.gatewayLastTurnStatus = lastTurnStatus;
+  ctx.gatewayThreadId = finalSession.state?.threadId ?? null;
+  ctx.gatewaySelectedModel = finalSession.state?.selectedModel ?? null;
 
   ctx.status = mapTurnToBenchmarkStatus(lastTurnStatus);
   if (isTurnSuccess(lastTurnStatus)) {

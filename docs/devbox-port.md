@@ -15,7 +15,8 @@
 | 运行形态 | Node CLI 批跑，无 `tasks` 表、无 `/api/tasks` |
 | Devbox 生命周期 | **每仓创建、每仓结束必删**（与 ShipRepo「completed 不删」不同，避免批跑泄漏） |
 | 队列 | 已有 `step-1-load-queue` + `BENCHMARK_LIMIT`，不变 |
-| 目标仓库 | **均为 public**；bootstrap 用 `https://github.com/{full_name}.git`，**不需要** `GITHUB_TOKEN` |
+| 目标仓库 | **均为 public**；bootstrap `git clone` 用 `https://github.com/{full_name}.git`（无 token） |
+| `GITHUB_TOKEN` | **必填**，创建 Devbox 时注入 `env`，供内置 skill 推镜像（GHCR 等） |
 | `kubeAccess` | **不传**（API 上为 optional；ShipRepo 为部署 skill 开启，benchmark sandbox 不需要访问 K8s） |
 
 后续若 sandbox skill 产出物与 ShipRepo 的 `.sealos/deployment-output.json` 契约不一致，在阶段 4 单独加「产物校验」；当前不阻塞 Gateway 判据。
@@ -105,7 +106,7 @@ scripts/                            # 冒烟与手工调试（不进入 benchmar
 | `SEALOS_HOST` | 已有 | Devbox API base |
 | `DEVBOX_JWT_SIGNING_KEY` | 已有 | Bearer JWT |
 | `DEVBOX_RUNTIME_IMAGE` | 可选 | 覆盖默认镜像 |
-| `GITHUB_TOKEN` | 可选 | **Benchmark 主路径不使用**（队列均为 public repo）；保留仅供其它脚本 |
+| `GITHUB_TOKEN` | 必填 | 传入 Devbox `env`（与 ShipRepo 一致）；bootstrap clone 不使用 |
 | `CODEX_GATEWAY_OPENAI_API_KEY` | 已有 | 创建 Devbox 时注入，供**内置** Gateway 使用 |
 | `CODEX_GATEWAY_OPENAI_BASE_URL` | 可选 | |
 | `CODEX_GATEWAY_MODEL` | 可选 | |
@@ -247,6 +248,26 @@ BENCHMARK_LIMIT=1 npm run benchmark
 
 查看 `.data/benchmark-*.csv`：`status` 为 `success` 或 `failed`，`gateway_session_id` 非空（turn 已发起）。  
 单仓 turn 可能耗时较长（默认超时 `BENCHMARK_TURN_TIMEOUT_MS=1800000`）。
+
+Turn 结束后会在终端打印完整 **`transcript`**（按条显示 role + 文本），以及最近若干条 `recentEvents`。
+
+#### 推荐测试命令（本地自行执行）
+
+```bash
+cd /path/to/brain-skills-benchmark
+npm install
+
+# 1) 控制面 + JWT
+npm run devbox:health:auth
+
+# 2) 仅阶段 2（create → bootstrap → delete，无 turn，约 1～2 分钟）
+SMOKE_REPO=ollama/ollama npm run devbox:smoke
+
+# 3) 端到端单仓（含 turn + transcript 输出，可能 10～30+ 分钟）
+BENCHMARK_LIMIT=1 npm run benchmark
+```
+
+`.env` 需配置：`SEALOS_HOST`、`DEVBOX_JWT_SIGNING_KEY`、`DEVBOX_TLS_INSECURE=1`、`CODEX_GATEWAY_OPENAI_API_KEY`、`GITHUB_TOKEN`、`BRAIN_SANDBOX_SKILLS_GIT`。
 
 ### 阶段 4 — 结果与 CSV
 

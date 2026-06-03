@@ -12,6 +12,9 @@ export async function run(ctx) {
   ctx.gatewayUrl = null;
   ctx.gatewayAuthToken = null;
   ctx.gatewaySessionId = null;
+  ctx.gatewayLastTurnStatus = null;
+  ctx.gatewayThreadId = null;
+  ctx.gatewaySelectedModel = null;
   ctx.workspaceReady = false;
   ctx.cleanupError = null;
 }

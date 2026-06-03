@@ -1,8 +1,9 @@
 import { DevboxApiError, execDevbox, getDevbox } from "./client.mjs";
 import { getBrainSandboxSkillsGit } from "./config.mjs";
 
-const BOOTSTRAP_READY_TIMEOUT_MS = 60_000;
+const DEFAULT_BOOTSTRAP_READY_TIMEOUT_MS = 120_000;
 const BOOTSTRAP_READY_POLL_MS = 2_000;
+const EXEC_PROBE_TIMEOUT_SECONDS = 15;
 const BOOTSTRAP_EXEC_TIMEOUT_SECONDS = 300;
 const BOOTSTRAP_OK_MARKER = "__BENCHMARK_BOOTSTRAP_OK__";
 
@@ -62,9 +63,58 @@ export function buildBootstrapScript(repoUrl, skillsGit) {
 function summarizeExecOutput(stdout, stderr) {
   const text = `${stdout}\n${stderr}`.trim();
   if (!text) {
-    return "[empty]";
+    return "[empty stdout/stderr from Devbox exec API]";
   }
   return text.length > 2000 ? text.slice(-2000) : text;
+}
+
+/** Devbox phase Running precedes in-pod SDK (e.g. :9757); exec may fail until it listens. */
+export function isRetryableExecError(error) {
+  if (!(error instanceof DevboxApiError)) {
+    return false;
+  }
+
+  const message = error.message.toLowerCase();
+
+  if (error.status === 409 && message.includes("devbox pod is not running")) {
+    return true;
+  }
+
+  return (
+    message.includes("sdk server") ||
+    message.includes("not reachable yet") ||
+    message.includes("connection refused") ||
+    message.includes("connection reset")
+  );
+}
+
+async function waitForDevboxExecReady(runtimeName, deadlineMs) {
+  const probeScript = 'printf "%s\\n" __BENCHMARK_EXEC_OK__';
+
+  while (Date.now() < deadlineMs) {
+    try {
+      const response = await execDevbox(runtimeName, {
+        command: ["sh", "-lc", probeScript],
+        timeoutSeconds: EXEC_PROBE_TIMEOUT_SECONDS,
+      });
+      if (
+        response.data.exitCode === 0 &&
+        response.data.stdout.includes("__BENCHMARK_EXEC_OK__")
+      ) {
+        return;
+      }
+    } catch (error) {
+      if (!isRetryableExecError(error)) {
+        throw error;
+      }
+    }
+
+    await sleep(BOOTSTRAP_READY_POLL_MS);
+  }
+
+  throw new Error(
+    `Timed out waiting for Devbox exec SDK on ${runtimeName} (in-pod server not reachable)`,
+  );
 }
 
 export async function runWorkspaceBootstrap(runtimeName, repoUrl, options = {}) {
@@ -73,7 +123,8 @@ export async function runWorkspaceBootstrap(runtimeName, repoUrl, options = {}) 
   const timeoutMs =
     options.bootstrapTimeoutMs ??
     Number.parseInt(
-      process.env.BENCHMARK_DEVBOX_BOOTSTRAP_TIMEOUT_MS || "60000",
+      process.env.BENCHMARK_DEVBOX_BOOTSTRAP_TIMEOUT_MS ||
+        String(DEFAULT_BOOTSTRAP_READY_TIMEOUT_MS),
       10,
     );
   const startedAt = Date.now();
@@ -92,7 +143,16 @@ export async function runWorkspaceBootstrap(runtimeName, repoUrl, options = {}) 
       continue;
     }
 
+    const deadlineMs = startedAt + timeoutMs;
+    if (Date.now() >= deadlineMs) {
+      throw new Error(
+        `Timed out waiting for Devbox ${runtimeName} before bootstrap`,
+      );
+    }
+
     try {
+      await waitForDevboxExecReady(runtimeName, deadlineMs);
+
       const execResponse = await execDevbox(runtimeName, {
         command: ["sh", "-lc", script],
         timeoutSeconds: BOOTSTRAP_EXEC_TIMEOUT_SECONDS,
@@ -107,14 +167,10 @@ export async function runWorkspaceBootstrap(runtimeName, repoUrl, options = {}) 
 
       return { stdout, stderr, skillsGit };
     } catch (error) {
-      if (
-        error instanceof DevboxApiError &&
-        error.status === 409 &&
-        error.message.includes("devbox pod is not running")
-      ) {
-        if (Date.now() - startedAt >= timeoutMs) {
+      if (isRetryableExecError(error)) {
+        if (Date.now() >= deadlineMs) {
           throw new Error(
-            `Timed out waiting for Devbox ${runtimeName} pod before bootstrap`,
+            `Timed out waiting for Devbox ${runtimeName} exec during bootstrap: ${error.message}`,
           );
         }
         await sleep(BOOTSTRAP_READY_POLL_MS);
@@ -143,18 +199,47 @@ export function buildVerifyWorkspaceScript() {
   ].join("\n");
 }
 
-export async function verifyWorkspace(runtimeName) {
-  const execResponse = await execDevbox(runtimeName, {
-    command: ["sh", "-lc", buildVerifyWorkspaceScript()],
-    timeoutSeconds: 120,
-  });
-
-  if (execResponse.data.exitCode !== 0) {
-    throw new Error(
-      `Workspace verification failed: ${summarizeExecOutput(
-        execResponse.data.stdout,
-        execResponse.data.stderr,
-      )}`,
+export async function verifyWorkspace(runtimeName, options = {}) {
+  const timeoutMs =
+    options.timeoutMs ??
+    Number.parseInt(
+      process.env.BENCHMARK_DEVBOX_BOOTSTRAP_TIMEOUT_MS ||
+        String(DEFAULT_BOOTSTRAP_READY_TIMEOUT_MS),
+      10,
     );
+  const startedAt = Date.now();
+  const script = buildVerifyWorkspaceScript();
+
+  while (true) {
+    const deadlineMs = startedAt + timeoutMs;
+    if (Date.now() >= deadlineMs) {
+      throw new Error(
+        `Timed out verifying workspace on Devbox ${runtimeName}`,
+      );
+    }
+
+    try {
+      await waitForDevboxExecReady(runtimeName, deadlineMs);
+      const execResponse = await execDevbox(runtimeName, {
+        command: ["sh", "-lc", script],
+        timeoutSeconds: 120,
+      });
+
+      if (execResponse.data.exitCode !== 0) {
+        throw new Error(
+          `Workspace verification failed: ${summarizeExecOutput(
+            execResponse.data.stdout,
+            execResponse.data.stderr,
+          )}`,
+        );
+      }
+      return;
+    } catch (error) {
+      if (isRetryableExecError(error)) {
+        await sleep(BOOTSTRAP_READY_POLL_MS);
+        continue;
+      }
+      throw error;
+    }
   }
 }
