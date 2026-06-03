@@ -1,5 +1,5 @@
-/** Stub: replace with real Devbox creation when API code is available. */
+import { provisionDevboxForRepo } from "../../lib/devbox/provision.mjs";
+
 export async function run(ctx) {
-  const slug = ctx.current.full_name.replace(/\//g, "-");
-  ctx.devboxId = `stub-${slug}`;
+  await provisionDevboxForRepo(ctx);
 }

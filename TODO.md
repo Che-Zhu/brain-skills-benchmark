@@ -2,6 +2,8 @@
 
 完成本列表 = 主流程可跑通（不含 API usage 记录）。
 
+**Devbox / Gateway 移植进度**（决策、阶段清单、目录约定）：[`docs/devbox-port.md`](docs/devbox-port.md)
+
 ## 架构（分层）
 
 ```text
@@ -51,14 +53,14 @@ Step 之间只传 `ctx`，总控不出现 clone / skill / CSV 细节。
 
 对应 `src/steps/step-2-2-create-devbox/create-devbox.mjs`
 
-- [x] 创建 Devbox，传入本仓所需信息（仓库标识等）— **当前为 stub**
-- [x] 记录 `ctx.devboxId`（或等价句柄）
+- [x] 创建 Devbox，传入本仓所需信息（仓库标识等）— 见 `docs/devbox-port.md` 阶段 2
+- [x] 记录 `ctx.runtimeName` / `ctx.gatewayUrl` 等
 
 ### 2.3 Devbox 内执行 Skill
 
 对应 `src/steps/step-2-3-run-skill/run-skill.mjs`
 
-- [x] 在 Devbox 内调用 skill：分析项目 → 构建 → 上传镜像 — **当前为 stub**
+- [ ] 在 Devbox 内调用 skill（`BRAIN_SANDBOX_SKILLS_GIT` + Gateway turn）— 见 `docs/devbox-port.md` 阶段 3
 
 ### 2.4 记录结果
 
@@ -77,7 +79,7 @@ Step 之间只传 `ctx`，总控不出现 clone / skill / CSV 细节。
 
 对应 `src/steps/step-2-6-delete-devbox/delete-devbox.mjs`
 
-- [x] 删除 Devbox — **当前为 stub**
+- [x] 删除 Devbox（每仓必删，`run.mjs` finally）— 见 `docs/devbox-port.md` 阶段 5
 
 ### 2.7 下一轮
 

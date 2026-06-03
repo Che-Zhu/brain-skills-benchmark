@@ -8,13 +8,11 @@ import { run as finalizeOutcome } from "./steps/step-2-4-finalize-outcome/finali
 import { run as appendCsvRow } from "./steps/step-2-5-append-csv-row/append-csv-row.mjs";
 import { run as deleteDevbox } from "./steps/step-2-6-delete-devbox/delete-devbox.mjs";
 
-const REPO_LOOP_STEPS = [
-  markStarted,
+const REPO_BODY_STEPS = [
   createDevbox,
   runSkill,
   finalizeOutcome,
   appendCsvRow,
-  deleteDevbox,
 ];
 
 export async function main() {
@@ -23,10 +21,21 @@ export async function main() {
   await loadQueue(ctx);
 
   while (ctx.queue.length > 0) {
-    for (const step of REPO_LOOP_STEPS) {
-      await step(ctx);
+    await markStarted(ctx);
+    try {
+      for (const step of REPO_BODY_STEPS) {
+        await step(ctx);
+      }
+      console.log(`[${ctx.status}] ${ctx.current.full_name}`);
+    } finally {
+      try {
+        await deleteDevbox(ctx);
+      } catch (error) {
+        console.error(
+          `[cleanup] failed to delete devbox: ${error instanceof Error ? error.message : error}`,
+        );
+      }
     }
-    console.log(`[${ctx.status}] ${ctx.current.full_name}`);
   }
 
   console.log(`Wrote results to ${ctx.csvPath}`);

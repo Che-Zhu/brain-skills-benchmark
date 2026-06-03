@@ -3,6 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "benchmark": "node run.mjs"
+    "benchmark": "node run.mjs",
+    "devbox:health": "node scripts/devbox-health.mjs",
+    "devbox:health:auth": "node scripts/devbox-health.mjs --auth",
+    "devbox:smoke": "node scripts/devbox-smoke-one-repo.mjs"
+  },
+  "dependencies": {
+    "jose": "^6.0.11"
   }
 }

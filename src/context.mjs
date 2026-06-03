@@ -21,12 +21,19 @@ export function createContext() {
   const csvPath = join(dataDir, `benchmark-${runId}.csv`);
 
   return {
+    runId,
     queue: [],
     current: null,
-    devboxId: null,
+    repoUrl: null,
+    runtimeName: null,
+    runtimeNamespace: null,
+    gatewayUrl: null,
+    workspaceReady: false,
     startedAt: null,
     finishedAt: null,
     status: null,
+    error: null,
+    cleanupError: null,
     csvPath,
   };
 }

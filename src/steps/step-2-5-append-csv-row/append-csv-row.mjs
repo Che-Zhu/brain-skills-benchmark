@@ -1,7 +1,7 @@
 import { appendFileSync, existsSync } from "node:fs";
 
 const HEADER =
-  "full_name,status,started_at,finished_at,devbox_id,duration_ms\n";
+  "full_name,status,started_at,finished_at,runtime_name,duration_ms\n";
 
 function escapeCsv(value) {
   const s = String(value ?? "");
@@ -22,7 +22,7 @@ export async function run(ctx) {
     escapeCsv(ctx.status),
     ctx.startedAt,
     ctx.finishedAt,
-    escapeCsv(ctx.devboxId),
+    escapeCsv(ctx.runtimeName),
     durationMs,
   ].join(",");
 
