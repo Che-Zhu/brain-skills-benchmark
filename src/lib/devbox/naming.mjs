@@ -1,4 +1,7 @@
+import { createHash } from "node:crypto";
+
 const DNS_1123_NAME_MAX = 63;
+const UPSTREAM_ID_MAX = 63;
 
 function slugifyFullName(fullName) {
   return fullName
@@ -28,18 +31,15 @@ export function createBenchmarkDevboxName(runId, fullName) {
   return name;
 }
 
-function slugifyLabel(value) {
-  return value
-    .replace(/\//g, "-")
-    .replace(/[^a-zA-Z0-9._-]+/g, "-")
-    .replace(/^[-_.]+|[-_.]+$/g, "");
-}
-
-/** upstreamID for list/create dedup within a batch. */
+/** upstreamID for list/create dedup (K8s label, max 63 bytes). */
 export function createBenchmarkUpstreamId(runId, fullName) {
-  const id = `benchmark-${slugifyLabel(runId)}-${slugifyLabel(fullName)}`;
-  if (!id || !/^[A-Za-z0-9]/.test(id) || !/[A-Za-z0-9]$/.test(id)) {
-    throw new Error(`Invalid upstreamID derived from runId/full_name: ${id}`);
+  const hash = createHash("sha256")
+    .update(`${runId}\0${fullName}`)
+    .digest("hex")
+    .slice(0, 32);
+  const id = `bm-${hash}`;
+  if (id.length > UPSTREAM_ID_MAX) {
+    throw new Error(`upstreamID exceeds ${UPSTREAM_ID_MAX} bytes: ${id}`);
   }
   return id;
 }

@@ -2,7 +2,10 @@ import { createDevbox } from "./client.mjs";
 import { buildCreateDevboxInput } from "./create-input.mjs";
 import { runWorkspaceBootstrap } from "./bootstrap.mjs";
 import { getDevboxWithSecretRetry } from "./get-devbox.mjs";
-import { resolveGatewayUrl } from "./gateway-url.mjs";
+import {
+  getGatewayAuthTokenFromDevboxInfo,
+  resolveGatewayUrl,
+} from "./gateway-url.mjs";
 import { buildPublicRepoUrl } from "./repo-url.mjs";
 import { waitForRunningDevbox } from "./wait-running.mjs";
 
@@ -25,6 +28,7 @@ export async function provisionDevboxForRepo(ctx) {
   const runtimeInfo = infoResponse.data;
 
   ctx.gatewayUrl = resolveGatewayUrl(runtimeName, ctx.gatewayUrl, runtimeInfo);
+  ctx.gatewayAuthToken = getGatewayAuthTokenFromDevboxInfo(runtimeInfo);
   console.info(`[devbox] gateway ${ctx.gatewayUrl}`);
 
   console.info(`[devbox] bootstrap ${runtimeName}`);

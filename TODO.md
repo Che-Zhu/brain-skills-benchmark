@@ -60,7 +60,7 @@ Step 之间只传 `ctx`，总控不出现 clone / skill / CSV 细节。
 
 对应 `src/steps/step-2-3-run-skill/run-skill.mjs`
 
-- [ ] 在 Devbox 内调用 skill（`BRAIN_SANDBOX_SKILLS_GIT` + Gateway turn）— 见 `docs/devbox-port.md` 阶段 3
+- [x] 在 Devbox 内调用 skill（`BRAIN_SANDBOX_SKILLS_GIT` + Gateway turn）— 见 `docs/devbox-port.md` 阶段 3
 
 ### 2.4 记录结果
 

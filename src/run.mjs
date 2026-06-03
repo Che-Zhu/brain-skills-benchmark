@@ -26,7 +26,19 @@ export async function main() {
       for (const step of REPO_BODY_STEPS) {
         await step(ctx);
       }
-      console.log(`[${ctx.status}] ${ctx.current.full_name}`);
+      console.log(
+        `[${ctx.status}] ${ctx.current.full_name}${ctx.error ? `: ${ctx.error}` : ""}`,
+      );
+    } catch (error) {
+      if (ctx.status == null) {
+        ctx.status = "failed";
+        ctx.error = error instanceof Error ? error.message : String(error);
+      }
+      await finalizeOutcome(ctx);
+      await appendCsvRow(ctx);
+      console.error(
+        `[failed] ${ctx.current.full_name}: ${ctx.error ?? "unknown error"}`,
+      );
     } finally {
       try {
         await deleteDevbox(ctx);

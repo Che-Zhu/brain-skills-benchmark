@@ -10,6 +10,8 @@ export async function run(ctx) {
   ctx.runtimeName = null;
   ctx.runtimeNamespace = null;
   ctx.gatewayUrl = null;
+  ctx.gatewayAuthToken = null;
+  ctx.gatewaySessionId = null;
   ctx.workspaceReady = false;
   ctx.cleanupError = null;
 }

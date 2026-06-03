@@ -233,16 +233,26 @@ SMOKE_REPO=ollama/ollama npm run devbox:smoke
 
 ### 阶段 3 — 调用 Devbox 内置 Gateway（session + turn）
 
-- [ ] `src/lib/devbox/gateway-url.mjs`（从 `getDevbox` 解析 `gateway.url` 等，对齐 ShipRepo `resolveCodexGatewayUrl`）
-- [ ] `src/lib/devbox/gateway/*`（client、session、turn、prompt；摘录 ShipRepo `lib/codex-gateway`，无 DB/SSE）
-- [ ] `step-2-3-run-skill` 接真实现（`ctx.gatewayUrl` 已存在 → 发 turn → 轮询 state）
-- [ ] 验收：单仓 turn 结束且 `ctx.status` 正确
+- [x] `src/lib/devbox/gateway-url.mjs`（URL + auth token；阶段 2 `provision` 已写入 `ctx`）
+- [x] `src/lib/devbox/gateway/*`（client、session、turn、prompt、completion；轮询 state，无 SSE/DB）
+- [x] `step-2-3-run-skill` 接真实现
+- [x] `finalize-outcome` / CSV 尊重 `ctx.status` 与 `ctx.error`
+- [ ] 验收：本机 `BENCHMARK_LIMIT=1 npm run benchmark` turn 结束且 CSV 正确
+
+#### 阶段 3 怎么验收？
+
+```bash
+BENCHMARK_LIMIT=1 npm run benchmark
+```
+
+查看 `.data/benchmark-*.csv`：`status` 为 `success` 或 `failed`，`gateway_session_id` 非空（turn 已发起）。  
+单仓 turn 可能耗时较长（默认超时 `BENCHMARK_TURN_TIMEOUT_MS=1800000`）。
 
 ### 阶段 4 — 结果与 CSV
 
-- [ ] `finalize-outcome` 不再默认 success
-- [ ] `append-csv-row` 增加 `error`, `runtime_name` 等列
-- [ ] 验收：批跑 CSV 可追踪失败原因
+- [x] `finalize-outcome` 不再默认 success
+- [x] `append-csv-row` 增加 `error`, `runtime_name`, `gateway_session_id`
+- [ ] 验收：批跑 CSV 可追踪失败原因（`BENCHMARK_LIMIT>1`）
 
 ### 阶段 5 — 清理与总控
 
@@ -275,3 +285,4 @@ SMOKE_REPO=ollama/ollama npm run devbox:smoke
 | 2026-06-03 | 阶段 1 实现：`lib/devbox/*`、`npm run devbox:health` |
 | 2026-06-03 | 创建 Devbox 不传 `kubeAccess` |
 | 2026-06-03 | 阶段 2 实现：`provision`、`devbox:smoke` |
+| 2026-06-03 | 阶段 3 实现：`lib/devbox/gateway/*`、`run-skill` |

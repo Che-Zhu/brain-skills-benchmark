@@ -21,6 +21,16 @@ export function getGatewayUrlFromDevboxInfo(info) {
   ]);
 }
 
+export function getGatewayAuthTokenFromDevboxInfo(info) {
+  return pickGatewayString(info?.gateway, [
+    "accessToken",
+    "authToken",
+    "bearerToken",
+    "token",
+    "jwt",
+  ]);
+}
+
 export function resolveGatewayUrl(runtimeName, currentUrl, info) {
   const fromDevbox = getGatewayUrlFromDevboxInfo(info);
   if (fromDevbox) {

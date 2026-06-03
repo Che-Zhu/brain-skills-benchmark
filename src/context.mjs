@@ -28,6 +28,8 @@ export function createContext() {
     runtimeName: null,
     runtimeNamespace: null,
     gatewayUrl: null,
+    gatewayAuthToken: null,
+    gatewaySessionId: null,
     workspaceReady: false,
     startedAt: null,
     finishedAt: null,
