@@ -53,7 +53,14 @@ export function buildCreateDevboxInput(ctx) {
   const input = {
     name: runtimeName,
     upstreamID,
-    env,
+    kubeAccess: {
+      enabled: true,
+      roleTemplate: "edit",
+    },
+    env: {
+      ...env,
+      WORK_DIR: "/home/devbox/workspace",
+    },
     pauseAt: getDevboxPauseAt(),
     archiveAfterPauseTime: getDevboxArchiveAfterPauseTime(),
     labels: [

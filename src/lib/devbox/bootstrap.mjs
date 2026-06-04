@@ -34,6 +34,15 @@ export function workspaceDirScriptLines() {
   ];
 }
 
+/** Bootstrap exec runs as root; Gateway agent uses devbox — fix workspace ownership. */
+export function workspaceOwnershipFixScriptLines() {
+  return [
+    'if id devbox >/dev/null 2>&1; then',
+    '  chown -R devbox:devbox "$workspace_dir"',
+    "fi",
+  ];
+}
+
 export function buildBootstrapScript(repoUrl, skillsGit) {
   const escapedRepo = shellEscape(repoUrl);
   const skillsCommand = `npx --yes skills add ${shellEscape(skillsGit)} -y`;
@@ -56,6 +65,7 @@ export function buildBootstrapScript(repoUrl, skillsGit) {
     '  printf "ERROR: no SKILL.md under .codex/skills or .agents/skills after skills add\\n" >&2',
     "  exit 1",
     "fi",
+    ...workspaceOwnershipFixScriptLines(),
     `printf '%s\\n' "${BOOTSTRAP_OK_MARKER}"`,
   ].join("\n");
 }
