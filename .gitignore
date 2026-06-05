@@ -1,6 +1,6 @@
 node_modules/
 .DS_Store
-.data/
+.report/
 *.log
 .env
 .env.local

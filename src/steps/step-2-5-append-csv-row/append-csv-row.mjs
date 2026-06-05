@@ -1,32 +1,45 @@
 import { appendFileSync, existsSync } from "node:fs";
+import { CSV_HEADER, formatCsvRow } from "../../lib/csv-report.mjs";
+import {
+  fetchAllOverviewRecords,
+  getOverviewApiKey,
+  sumUsageInWindow,
+} from "../../lib/overview-usage.mjs";
 
-const HEADER =
-  "full_name,status,error,started_at,finished_at,runtime_name,gateway_session_id,duration_ms\n";
-
-function escapeCsv(value) {
-  const s = String(value ?? "");
-  if (/[",\n]/.test(s)) {
-    return `"${s.replace(/"/g, '""')}"`;
+async function fetchRepoUsage(ctx) {
+  try {
+    const apiKey = getOverviewApiKey();
+    const records = await fetchAllOverviewRecords(apiKey);
+    return sumUsageInWindow(records, ctx.startedAt, ctx.finishedAt);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`[report] overview usage fetch failed: ${message}`);
+    return { apiRequests: 0, apiTokens: 0, apiCostUsd: 0 };
   }
-  return s;
 }
 
 export async function run(ctx) {
+  const usage = await fetchRepoUsage(ctx);
+  console.info(
+    `[report] ${ctx.current.full_name}: ${usage.apiRequests} requests, ${usage.apiTokens} tokens, $${usage.apiCostUsd.toFixed(4)}`,
+  );
+
   if (!existsSync(ctx.csvPath)) {
-    appendFileSync(ctx.csvPath, HEADER);
+    appendFileSync(ctx.csvPath, CSV_HEADER);
   }
 
-  const durationMs = ctx.finishedAt - ctx.startedAt;
-  const row = [
-    escapeCsv(ctx.current.full_name),
-    escapeCsv(ctx.status),
-    escapeCsv(ctx.error),
-    ctx.startedAt,
-    ctx.finishedAt,
-    escapeCsv(ctx.runtimeName),
-    escapeCsv(ctx.gatewaySessionId),
-    durationMs,
-  ].join(",");
+  const row = formatCsvRow({
+    fullName: ctx.current.full_name,
+    status: ctx.status,
+    error: ctx.error,
+    startedAt: ctx.startedAt,
+    finishedAt: ctx.finishedAt,
+    runtimeName: ctx.runtimeName,
+    gatewaySessionId: ctx.gatewaySessionId,
+    apiRequests: usage.apiRequests,
+    apiTokens: usage.apiTokens,
+    apiCostUsd: usage.apiCostUsd,
+  });
 
   appendFileSync(ctx.csvPath, `${row}\n`);
 }

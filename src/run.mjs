@@ -15,6 +15,12 @@ const REPO_BODY_STEPS = [
   appendCsvRow,
 ];
 
+const REPO_INTERVAL_MS = 2 * 60 * 1000;
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export async function main() {
   loadEnvFile();
   const ctx = createContext();
@@ -47,6 +53,13 @@ export async function main() {
           `[cleanup] failed to delete devbox: ${error instanceof Error ? error.message : error}`,
         );
       }
+    }
+
+    if (ctx.queue.length > 0) {
+      console.info(
+        `[benchmark] waiting ${REPO_INTERVAL_MS / 60_000} min before next repo (${ctx.queue.length} left)`,
+      );
+      await sleep(REPO_INTERVAL_MS);
     }
   }
 

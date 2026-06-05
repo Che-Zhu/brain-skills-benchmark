@@ -69,11 +69,11 @@ Step 之间只传 `ctx`，总控不出现 clone / skill / CSV 细节。
 - [x] 记录本仓成功或失败 → `ctx.status`
 - [x] 记录结束时间戳 → `ctx.finishedAt`
 
-### 2.5 写 CSV
+### 2.5 写 CSV + 本仓 API 用量
 
 对应 `src/steps/step-2-5-append-csv-row/append-csv-row.mjs`
 
-- [x] 将本仓结果写入 CSV 一行
+- [x] 拉取 overview，按本仓时间窗汇总用量，追加 CSV 一行
 
 ### 2.6 清理
 
