@@ -1,0 +1,584 @@
+[
+  {
+    "full_name": "ollama/ollama",
+    "stars": 163526,
+    "language": "Go",
+    "description": "Get up and running with Kimi-K2.5, GLM-5, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
+    "category": "backend-service",
+    "tier": 1,
+    "tier_label": "has-image",
+    "has_dockerfile": true,
+    "has_compose": false,
+    "docker_hub": {
+      "found": true,
+      "pull_count": 91268612,
+      "namespace": "ollama"
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": true,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "medium",
+      "reasoning": "Official Docker image (ollama/ollama) published on Docker Hub, but deployment requires model selection, storage configuration, and GPU resource considerations for optimal performance."
+    },
+    "selection_rank": 1,
+    "selection_reason": "local LLM service with official image"
+  },
+  {
+    "full_name": "open-webui/open-webui",
+    "stars": 125077,
+    "language": "Python",
+    "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+    "category": "backend-service",
+    "tier": 2,
+    "tier_label": "has-dockerfile",
+    "has_dockerfile": true,
+    "has_compose": true,
+    "docker_hub": {
+      "found": false,
+      "pull_count": 0,
+      "namespace": ""
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": false,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "medium",
+      "reasoning": "The project publishes official Docker images with variants (`:ollama` and `:cuda` tags), includes docker-compose configuration, and emphasizes seamless Docker setup, but deployment complexity is medium due to optional integrations (Ollama, OpenAI APIs, vector databases, web search providers) that may require configuration."
+    },
+    "selection_rank": 2,
+    "selection_reason": "AI web UI commonly deployed with model backends"
+  },
+  {
+    "full_name": "home-assistant/core",
+    "stars": 85027,
+    "language": "Python",
+    "description": ":house_with_garden: Open source home automation that puts local control and privacy first.",
+    "category": "backend-service",
+    "tier": 2,
+    "tier_label": "has-dockerfile",
+    "has_dockerfile": true,
+    "has_compose": false,
+    "docker_hub": {
+      "found": false,
+      "pull_count": 0,
+      "namespace": ""
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": false,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "medium",
+      "reasoning": "Home Assistant publishes official Docker images to Docker Hub and GHCR; deployment requires persistent storage for configuration, database, and integration setup, though it's designed for self-hosting on modest hardware like Raspberry Pi."
+    },
+    "selection_rank": 3,
+    "selection_reason": "home automation service with real self-hosting demand"
+  },
+  {
+    "full_name": "louislam/uptime-kuma",
+    "stars": 83329,
+    "language": "JavaScript",
+    "description": "A fancy self-hosted monitoring tool",
+    "category": "backend-service",
+    "tier": 1,
+    "tier_label": "has-image",
+    "has_dockerfile": false,
+    "has_compose": true,
+    "docker_hub": {
+      "found": true,
+      "pull_count": 142723420,
+      "namespace": "louislam"
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": true,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "simple",
+      "reasoning": "Official louislam/uptime-kuma image published on Docker Hub; single-service web application with straightforward Docker Compose setup and well-documented deployment options requiring minimal configuration."
+    },
+    "selection_rank": 4,
+    "selection_reason": "simple self-hosted monitoring app"
+  },
+  {
+    "full_name": "Stirling-Tools/Stirling-PDF",
+    "stars": 74601,
+    "language": "TypeScript",
+    "description": "#1 PDF Application on GitHub that lets you edit PDFs on any device anywhere",
+    "category": "backend-service",
+    "tier": 1,
+    "tier_label": "has-image",
+    "has_dockerfile": false,
+    "has_compose": false,
+    "docker_hub": {
+      "found": false,
+      "pull_count": 0,
+      "namespace": ""
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": true,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "simple",
+      "reasoning": "The project publishes official Docker images on Docker Hub and a custom registry (docker.stirlingpdf.com), with a quick-start deployment requiring only a single docker run command and port mapping."
+    },
+    "selection_rank": 5,
+    "selection_reason": "single-purpose web utility app"
+  },
+  {
+    "full_name": "go-gitea/gitea",
+    "stars": 53930,
+    "language": "Go",
+    "description": "Git with a cup of tea! Painless self-hosted all-in-one software development service, including Git hosting, code review, team collaboration, package registry and CI/CD",
+    "category": "backend-service",
+    "tier": 2,
+    "tier_label": "has-dockerfile",
+    "has_dockerfile": true,
+    "has_compose": false,
+    "docker_hub": {
+      "found": false,
+      "pull_count": 0,
+      "namespace": ""
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": false,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "medium",
+      "reasoning": "Gitea publishes official Docker images and is designed for easy self-hosting, but deployment requires database configuration, persistent storage management, and multiple service dependencies typical of an all-in-one platform."
+    },
+    "selection_rank": 6,
+    "selection_reason": "self-hosted Git collaboration service"
+  },
+  {
+    "full_name": "minio/minio",
+    "stars": 60390,
+    "language": "Go",
+    "description": "MinIO is a high-performance, S3 compatible object store, open sourced under GNU AGPLv3 license.",
+    "category": "backend-service",
+    "tier": 1,
+    "tier_label": "has-image",
+    "has_dockerfile": true,
+    "has_compose": false,
+    "docker_hub": {
+      "found": true,
+      "pull_count": 1775322730,
+      "namespace": "minio"
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": true,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "simple",
+      "reasoning": "MinIO publishes an official image on Docker Hub (minio/minio); deployment is straightforward with default credentials, single service, and embedded web UI—though distributed multi-node setups would be more complex."
+    },
+    "selection_rank": 7,
+    "selection_reason": "storage service with production deployment shape"
+  },
+  {
+    "full_name": "n8n-io/n8n",
+    "stars": 176577,
+    "language": "TypeScript",
+    "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+    "category": "fullstack-app",
+    "tier": 1,
+    "tier_label": "has-image",
+    "has_dockerfile": false,
+    "has_compose": false,
+    "docker_hub": {
+      "found": false,
+      "pull_count": 0,
+      "namespace": ""
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": true,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "simple",
+      "reasoning": "n8n publishes an official Docker image at docker.n8n.io/n8nio/n8n with straightforward deployment documented in the README (single docker run command with just a volume mount for persistence)."
+    },
+    "selection_rank": 8,
+    "selection_reason": "workflow automation fullstack app"
+  },
+  {
+    "full_name": "supabase/supabase",
+    "stars": 98230,
+    "language": "TypeScript",
+    "description": "The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications.",
+    "category": "fullstack-app",
+    "tier": 3,
+    "tier_label": "no-docker",
+    "has_dockerfile": false,
+    "has_compose": false,
+    "docker_hub": {
+      "found": false,
+      "pull_count": 0,
+      "namespace": ""
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": false,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": false,
+      "deploy_complexity": "complex",
+      "reasoning": "Supabase has no Docker configuration in the repository and is primarily offered as a hosted platform; deploying it would require orchestrating multiple services (Postgres, Realtime, PostgREST, GoTrue, Kong, Storage API, and more) with complex interdependencies."
+    },
+    "selection_rank": 9,
+    "selection_reason": "complex backend platform with multiple services"
+  },
+  {
+    "full_name": "immich-app/immich",
+    "stars": 93605,
+    "language": "TypeScript",
+    "description": "High performance self-hosted photo and video management solution.",
+    "category": "fullstack-app",
+    "tier": 3,
+    "tier_label": "no-docker",
+    "has_dockerfile": false,
+    "has_compose": false,
+    "docker_hub": {
+      "found": false,
+      "pull_count": 0,
+      "namespace": ""
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": false,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "complex",
+      "reasoning": "Immich is a sophisticated self-hosted photo/video management solution featuring AI-powered capabilities (facial recognition, object detection, CLIP search), multi-user support, and multiple interconnected services, indicating complex deployment requirements typical of modern container-based architectures."
+    },
+    "selection_rank": 10,
+    "selection_reason": "media management fullstack app"
+  },
+  {
+    "full_name": "grafana/grafana",
+    "stars": 72401,
+    "language": "TypeScript",
+    "description": "The open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple sources like Prometheus, Loki, Elasticsearch, InfluxDB, Postgres and many more.",
+    "category": "fullstack-app",
+    "tier": 1,
+    "tier_label": "has-image",
+    "has_dockerfile": true,
+    "has_compose": false,
+    "docker_hub": {
+      "found": true,
+      "pull_count": 5156495354,
+      "namespace": "grafana"
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": false,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "simple",
+      "reasoning": "Grafana publishes official Docker images on Docker Hub and is a single-service web application with straightforward Docker deployment documented extensively on grafana.com."
+    },
+    "selection_rank": 11,
+    "selection_reason": "observability dashboard app"
+  },
+  {
+    "full_name": "nocodb/nocodb",
+    "stars": 62243,
+    "language": "TypeScript",
+    "description": "🔥 🔥 🔥 A Free & Self-hostable Airtable Alternative",
+    "category": "fullstack-app",
+    "tier": 1,
+    "tier_label": "has-image",
+    "has_dockerfile": false,
+    "has_compose": false,
+    "docker_hub": {
+      "found": true,
+      "pull_count": 18399112,
+      "namespace": "nocodb"
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": true,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "medium",
+      "reasoning": "Official nocodb/nocodb image is published on Docker Hub with simple single-container SQLite deployment available, but production deployments requiring PostgreSQL, Redis, and Minio increase complexity."
+    },
+    "selection_rank": 12,
+    "selection_reason": "database-backed no-code fullstack app"
+  },
+  {
+    "full_name": "excalidraw/excalidraw",
+    "stars": 117603,
+    "language": "TypeScript",
+    "description": "Virtual whiteboard for sketching hand-drawn like diagrams",
+    "category": "frontend-app",
+    "tier": 1,
+    "tier_label": "has-image",
+    "has_dockerfile": true,
+    "has_compose": true,
+    "docker_hub": {
+      "found": true,
+      "pull_count": 5748745,
+      "namespace": "excalidraw"
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": false,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": false,
+      "deploy_complexity": "medium",
+      "reasoning": "While the project provides Dockerfile and docker-compose for self-hosting, there is no mention of official Docker Hub/GHCR images in the README, and the docker-compose setup suggests multiple services are needed for the real-time collaboration features beyond the basic whiteboard application."
+    },
+    "selection_rank": 13,
+    "selection_reason": "collaborative frontend app"
+  },
+  {
+    "full_name": "CorentinTh/it-tools",
+    "stars": 37261,
+    "language": "Vue",
+    "description": "Collection of handy online tools for developers, with great UX. ",
+    "category": "frontend-app",
+    "tier": 1,
+    "tier_label": "has-image",
+    "has_dockerfile": true,
+    "has_compose": false,
+    "docker_hub": {
+      "found": true,
+      "pull_count": 17393153,
+      "namespace": "corentinth"
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": true,
+    "readme_docker_images": [
+      "ghcr.io/corentinth/it-tools"
+    ],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "simple",
+      "reasoning": "IT-Tools publishes official images on both Docker Hub (corentinth/it-tools) and GHCR, and is a single web service deployable with a simple docker run command with no complex dependencies."
+    },
+    "selection_rank": 14,
+    "selection_reason": "static/self-hosted developer tools frontend"
+  },
+  {
+    "full_name": "kamranahmedse/developer-roadmap",
+    "stars": 349821,
+    "language": "TypeScript",
+    "description": "Interactive roadmaps, guides and other educational content to help developers grow in their careers.",
+    "category": "doc-site",
+    "tier": 3,
+    "tier_label": "no-docker",
+    "has_dockerfile": false,
+    "has_compose": false,
+    "docker_hub": {
+      "found": false,
+      "pull_count": 0,
+      "namespace": ""
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": false,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": false,
+      "deploy_complexity": "simple",
+      "reasoning": "No Dockerfile or official Docker image in repo; however, as a standard Node.js web application (roadmap.sh), containerizing it would be straightforward with minimal dependencies."
+    },
+    "selection_rank": 15,
+    "selection_reason": "representative deployable documentation site"
+  },
+  {
+    "full_name": "PDFMathTranslate/PDFMathTranslate",
+    "stars": 31918,
+    "language": "Python",
+    "description": "[EMNLP 2025 Demo] PDF scientific paper translation with preserved formats - 基于 AI 完整保留排版的 PDF 文档全文双语翻译，支持 Google/DeepL/Ollama/OpenAI 等服务，提供 CLI/GUI/MCP/Docker/Zotero",
+    "category": "ml-serving",
+    "tier": 1,
+    "tier_label": "has-image",
+    "has_dockerfile": true,
+    "has_compose": true,
+    "docker_hub": {
+      "found": false,
+      "pull_count": 0,
+      "namespace": ""
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": true,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "medium",
+      "reasoning": "Official Docker image published on Docker Hub (byaidu/pdf2zh) with significant pull volume; single-service architecture but requires backend configuration (API keys and service selection for Google/DeepL/Ollama/OpenAI)."
+    },
+    "selection_rank": 16,
+    "selection_reason": "AI document translation serving app"
+  },
+  {
+    "full_name": "2noise/ChatTTS",
+    "stars": 38814,
+    "language": "Python",
+    "description": "A generative speech model for daily dialogue.",
+    "category": "ml-serving",
+    "tier": 3,
+    "tier_label": "no-docker",
+    "has_dockerfile": false,
+    "has_compose": false,
+    "docker_hub": {
+      "found": false,
+      "pull_count": 0,
+      "namespace": ""
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": false,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": false,
+      "deploy_complexity": "medium",
+      "reasoning": "No official Docker image or Dockerfile exists in the repository; containerization would require handling Python dependencies, HuggingFace model downloads, optional vLLM setup, and GPU/CUDA configuration."
+    },
+    "selection_rank": 17,
+    "selection_reason": "TTS model serving candidate without Docker support"
+  },
+  {
+    "full_name": "Pythagora-io/gpt-pilot",
+    "stars": 33800,
+    "language": "Python",
+    "description": "The first real AI developer",
+    "category": "ai-agent-or-tool",
+    "tier": 2,
+    "tier_label": "has-dockerfile",
+    "has_dockerfile": true,
+    "has_compose": false,
+    "docker_hub": {
+      "found": false,
+      "pull_count": 0,
+      "namespace": ""
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": false,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": false,
+      "deploy_complexity": "medium",
+      "reasoning": "Project includes a Dockerfile and Docker documentation in the README but no evidence of official image publication on registries; deployment requires LLM API key configuration and optional PostgreSQL setup, plus the project is no longer actively maintained which may impact documentation completeness."
+    },
+    "selection_rank": 18,
+    "selection_reason": "AI agent tool with Dockerfile"
+  },
+  {
+    "full_name": "ToolJet/ToolJet",
+    "stars": 37490,
+    "language": "JavaScript",
+    "description": "ToolJet is the open-source foundation of ToolJet AI - the AI-native platform for building internal tools, dashboard, business applications, workflows and AI agents 🚀",
+    "category": "self-hosted-app",
+    "tier": 1,
+    "tier_label": "has-image",
+    "has_dockerfile": false,
+    "has_compose": true,
+    "docker_hub": {
+      "found": true,
+      "pull_count": 492417,
+      "namespace": "tooljet"
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": true,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "medium",
+      "reasoning": "ToolJet publishes official Docker images (tooljet/try on Docker Hub) with a documented quickstart command, but deployment requires PostgreSQL database setup, persistent volumes, and likely multiple services managed through the included docker-compose configuration."
+    },
+    "selection_rank": 19,
+    "selection_reason": "self-hosted internal tools platform"
+  },
+  {
+    "full_name": "xuxueli/xxl-job",
+    "stars": 29930,
+    "language": "Java",
+    "description": "A distributed task scheduling framework.（分布式任务调度平台XXL-JOB）",
+    "category": "framework-or-library",
+    "tier": 1,
+    "tier_label": "has-image",
+    "has_dockerfile": false,
+    "has_compose": false,
+    "docker_hub": {
+      "found": false,
+      "pull_count": 0,
+      "namespace": ""
+    },
+    "ghcr": {
+      "found": false,
+      "package_name": ""
+    },
+    "readme_mentions_docker": true,
+    "readme_docker_images": [],
+    "ai_assessment": {
+      "has_official_image": true,
+      "deploy_complexity": "medium",
+      "reasoning": "The project publishes an official Docker image (xuxueli/xxl-job-admin on Docker Hub) as stated in the README feature list, but deploying requires multiple components (admin center and executors), database configuration, and cluster coordination."
+    },
+    "selection_rank": 20,
+    "selection_reason": "distributed job scheduling platform"
+  }
+]

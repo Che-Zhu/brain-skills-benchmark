@@ -15,7 +15,7 @@ npm run benchmark
 
 ## 流程概览
 
-1. 从 `2000-repos/top1000-analysis-v3.json` 读取 `deployable === true` 的仓库，按 `BENCHMARK_LIMIT`（默认 5）取前 N 个。
+1. 从 `2000-repos/top1000-representative-deployable-apps.json` 读取已筛选的代表性可部署仓库；未设置 `BENCHMARK_LIMIT` 时跑完全部条目，设置后只取前 N 个。
 2. 对每个仓库：创建 Devbox → bootstrap → Gateway turn → **拉取本仓 API 用量并追加 CSV 一行** → 删除 Devbox。
 3. 若队列里还有下一个仓库，**等待 2 分钟** 再开始下一仓。
 
@@ -33,7 +33,7 @@ npm run benchmark
 | `GITHUB_TOKEN` | 注入 Devbox，供 skill 推镜像等 |
 | `CODEX_GATEWAY_OPENAI_API_KEY` | Devbox 内 Codex Gateway |
 | `BRAIN_SANDBOX_SKILLS_GIT` | `npx skills add` 的技能仓库 URL |
-| `BENCHMARK_LIMIT` | 本次批跑仓库数量（默认 `5`） |
+| `BENCHMARK_LIMIT` | 可选；本次批跑仓库数量（未设置则用队列文件中的全部条目） |
 
 常用可选项：`BENCHMARK_TURN_TIMEOUT_MS`（turn 超时，默认 30 分钟）、`BENCHMARK_TURN_POLL_MS`、`BENCHMARK_DEVBOX_BOOTSTRAP_TIMEOUT_MS` 等，见 `.env.example`。
 

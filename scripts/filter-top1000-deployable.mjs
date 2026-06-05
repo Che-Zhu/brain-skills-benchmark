@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
  * Purpose: List deployable repos from Top 1000 analysis (rank order).
- * Requires: 2000-repos/top1000-analysis-v3.json; BENCHMARK_LIMIT in .env (default 5).
- * Expected: stdout JSON array, up to LIMIT deployable repo records (same fields as input).
+ * Requires: 2000-repos/top1000-representative-deployable-apps.json; optional BENCHMARK_LIMIT in .env.
+ * Expected: stdout JSON array of curated repo records (truncated when LIMIT is set).
  */
 
 import { loadEnvFile } from "../src/lib/load-env.mjs";

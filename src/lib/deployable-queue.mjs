@@ -1,15 +1,13 @@
 import { readFileSync } from "node:fs";
 
-export const DEFAULT_ANALYSIS_FILE = new URL(
-  "../../2000-repos/top1000-analysis-v3.json",
+export const DEFAULT_QUEUE_FILE = new URL(
+  "../../2000-repos/top1000-representative-deployable-apps.json",
   import.meta.url,
 );
 
-const DEFAULT_LIMIT = 5;
-
 export function parseBenchmarkLimit(env = process.env) {
   const raw = env.BENCHMARK_LIMIT;
-  if (raw === undefined || raw === "") return DEFAULT_LIMIT;
+  if (raw === undefined || raw === "") return undefined;
   const limit = Number.parseInt(raw, 10);
   if (!Number.isFinite(limit) || limit < 1) {
     throw new Error(
@@ -19,8 +17,11 @@ export function parseBenchmarkLimit(env = process.env) {
   return limit;
 }
 
-export function loadDeployableRepos({ limit, inputFile = DEFAULT_ANALYSIS_FILE }) {
+/** Curated deployable repos (pre-filtered). Omit `limit` to load the full file. */
+export function loadDeployableRepos({ limit, inputFile = DEFAULT_QUEUE_FILE } = {}) {
   const repos = JSON.parse(readFileSync(inputFile, "utf8"));
-  const deployable = repos.filter((repo) => repo.deployable === true);
-  return deployable.slice(0, limit);
+  if (!Array.isArray(repos)) {
+    throw new Error(`Expected JSON array in ${inputFile.pathname ?? inputFile}`);
+  }
+  return limit === undefined ? repos : repos.slice(0, limit);
 }
