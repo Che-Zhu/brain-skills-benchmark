@@ -4,7 +4,7 @@ import {
 } from "./local-time.mjs";
 
 export const CSV_HEADER =
-  "full_name,status,error,started_at,finished_at,runtime_name,gateway_session_id,duration,api_requests,api_tokens,api_cost_usd\n";
+  "full_name,category,deploy_difficulty,status,error,started_at,finished_at,runtime_name,gateway_session_id,duration,api_requests,api_tokens,api_cost_usd\n";
 
 export function escapeCsv(value) {
   const s = String(value ?? "");
@@ -18,6 +18,8 @@ export function formatCsvRow(row) {
   const durationMs = row.finishedAt - row.startedAt;
   return [
     escapeCsv(row.fullName),
+    escapeCsv(row.category),
+    escapeCsv(row.deployDifficulty),
     escapeCsv(row.status),
     escapeCsv(row.error),
     escapeCsv(formatLocalTimestamp(row.startedAt)),

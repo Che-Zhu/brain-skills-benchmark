@@ -30,6 +30,8 @@ export async function run(ctx) {
 
   const row = formatCsvRow({
     fullName: ctx.current.full_name,
+    category: ctx.current.category,
+    deployDifficulty: ctx.current.deploy_difficulty,
     status: ctx.status,
     error: ctx.error,
     startedAt: ctx.startedAt,

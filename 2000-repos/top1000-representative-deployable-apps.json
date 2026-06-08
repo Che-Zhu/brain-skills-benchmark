@@ -26,7 +26,8 @@
       "reasoning": "Official Docker image (ollama/ollama) published on Docker Hub, but deployment requires model selection, storage configuration, and GPU resource considerations for optimal performance."
     },
     "selection_rank": 1,
-    "selection_reason": "local LLM service with official image"
+    "selection_reason": "local LLM service with official image",
+    "deploy_difficulty": "简单 — 根目录单一 Dockerfile，Go 单二进制；官方镜像可单容器运行（GPU/模型卷为可选配置）"
   },
   {
     "full_name": "open-webui/open-webui",
@@ -55,7 +56,8 @@
       "reasoning": "The project publishes official Docker images with variants (`:ollama` and `:cuda` tags), includes docker-compose configuration, and emphasizes seamless Docker setup, but deployment complexity is medium due to optional integrations (Ollama, OpenAI APIs, vector databases, web search providers) that may require configuration."
     },
     "selection_rank": 2,
-    "selection_reason": "AI web UI commonly deployed with model backends"
+    "selection_reason": "AI web UI commonly deployed with model backends",
+    "deploy_difficulty": "中等 — 根目录 Dockerfile + compose 默认捆绑 Ollama 双服务；可选 GPU、向量库与多种 compose 变体"
   },
   {
     "full_name": "home-assistant/core",
@@ -84,7 +86,8 @@
       "reasoning": "Home Assistant publishes official Docker images to Docker Hub and GHCR; deployment requires persistent storage for configuration, database, and integration setup, though it's designed for self-hosting on modest hardware like Raspberry Pi."
     },
     "selection_rank": 3,
-    "selection_reason": "home automation service with real self-hosting demand"
+    "selection_reason": "home automation service with real self-hosting demand",
+    "deploy_difficulty": "复杂 — 超大型 Python monorepo，Dockerfile 依赖 hassfest 生成流程与外置 base 镜像；集成生态重，配置面广"
   },
   {
     "full_name": "louislam/uptime-kuma",
@@ -113,7 +116,8 @@
       "reasoning": "Official louislam/uptime-kuma image published on Docker Hub; single-service web application with straightforward Docker Compose setup and well-documented deployment options requiring minimal configuration."
     },
     "selection_rank": 4,
-    "selection_reason": "simple self-hosted monitoring app"
+    "selection_reason": "simple self-hosted monitoring app",
+    "deploy_difficulty": "简单 — compose.yaml 仅 1 个服务；Node 单体应用，docker/ 下有标准构建路径"
   },
   {
     "full_name": "Stirling-Tools/Stirling-PDF",
@@ -142,7 +146,8 @@
       "reasoning": "The project publishes official Docker images on Docker Hub and a custom registry (docker.stirlingpdf.com), with a quick-start deployment requiring only a single docker run command and port mapping."
     },
     "selection_rank": 5,
-    "selection_reason": "single-purpose web utility app"
+    "selection_reason": "single-purpose web utility app",
+    "deploy_difficulty": "中等 — 官方预构建镜像可单容器；仓库内 8+ Dockerfile 与多套 lite/fat/split compose，从源码自建较复杂"
   },
   {
     "full_name": "go-gitea/gitea",
@@ -171,7 +176,8 @@
       "reasoning": "Gitea publishes official Docker images and is designed for easy self-hosting, but deployment requires database configuration, persistent storage management, and multiple service dependencies typical of an all-in-one platform."
     },
     "selection_rank": 6,
-    "selection_reason": "self-hosted Git collaboration service"
+    "selection_reason": "self-hosted Git collaboration service",
+    "deploy_difficulty": "中等 — 多阶段 Dockerfile（前端 pnpm + Go 编译）；生产需外置 PostgreSQL/MySQL 与持久化"
   },
   {
     "full_name": "minio/minio",
@@ -200,7 +206,8 @@
       "reasoning": "MinIO publishes an official image on Docker Hub (minio/minio); deployment is straightforward with default credentials, single service, and embedded web UI—though distributed multi-node setups would be more complex."
     },
     "selection_rank": 7,
-    "selection_reason": "storage service with production deployment shape"
+    "selection_reason": "storage service with production deployment shape",
+    "deploy_difficulty": "简单 — 根目录 Dockerfile，Go 单进程 S3；单节点部署只需 access/secret key 与数据卷"
   },
   {
     "full_name": "n8n-io/n8n",
@@ -229,7 +236,8 @@
       "reasoning": "n8n publishes an official Docker image at docker.n8n.io/n8nio/n8n with straightforward deployment documented in the README (single docker run command with just a volume mount for persistence)."
     },
     "selection_rank": 8,
-    "selection_reason": "workflow automation fullstack app"
+    "selection_reason": "workflow automation fullstack app",
+    "deploy_difficulty": "简单 — docker/images/n8n 官方构建链路；默认 SQLite 单容器，可选外置 Postgres"
   },
   {
     "full_name": "supabase/supabase",
@@ -258,7 +266,8 @@
       "reasoning": "Supabase has no Docker configuration in the repository and is primarily offered as a hosted platform; deploying it would require orchestrating multiple services (Postgres, Realtime, PostgREST, GoTrue, Kong, Storage API, and more) with complex interdependencies."
     },
     "selection_rank": 9,
-    "selection_reason": "complex backend platform with multiple services"
+    "selection_reason": "complex backend platform with multiple services",
+    "deploy_difficulty": "复杂 — docker/docker-compose.yml 编排 11 个服务（Kong、Postgres、Auth、Realtime、Storage 等），Env/JWT 配置多"
   },
   {
     "full_name": "immich-app/immich",
@@ -287,7 +296,8 @@
       "reasoning": "Immich is a sophisticated self-hosted photo/video management solution featuring AI-powered capabilities (facial recognition, object detection, CLIP search), multi-user support, and multiple interconnected services, indicating complex deployment requirements typical of modern container-based architectures."
     },
     "selection_rank": 10,
-    "selection_reason": "media management fullstack app"
+    "selection_reason": "media management fullstack app",
+    "deploy_difficulty": "复杂 — docker compose 固定 4 服务（server + ML + Redis + Postgres），多 Dockerfile 分模块构建"
   },
   {
     "full_name": "grafana/grafana",
@@ -316,7 +326,8 @@
       "reasoning": "Grafana publishes official Docker images on Docker Hub and is a single-service web application with straightforward Docker deployment documented extensively on grafana.com."
     },
     "selection_rank": 11,
-    "selection_reason": "observability dashboard app"
+    "selection_reason": "observability dashboard app",
+    "deploy_difficulty": "简单 — 根目录发布用 Dockerfile；生产部署为单容器 Grafana 服务（devenv compose 仅开发用）"
   },
   {
     "full_name": "nocodb/nocodb",
@@ -345,7 +356,8 @@
       "reasoning": "Official nocodb/nocodb image is published on Docker Hub with simple single-container SQLite deployment available, but production deployments requiring PostgreSQL, Redis, and Minio increase complexity."
     },
     "selection_rank": 12,
-    "selection_reason": "database-backed no-code fullstack app"
+    "selection_reason": "database-backed no-code fullstack app",
+    "deploy_difficulty": "中等 — 仓库无 Dockerfile（镜像外挂发布）；compose 示例含 PostgreSQL/Traefik，SQLite 单镜像路径较简单"
   },
   {
     "full_name": "excalidraw/excalidraw",
@@ -374,7 +386,8 @@
       "reasoning": "While the project provides Dockerfile and docker-compose for self-hosting, there is no mention of official Docker Hub/GHCR images in the README, and the docker-compose setup suggests multiple services are needed for the real-time collaboration features beyond the basic whiteboard application."
     },
     "selection_rank": 13,
-    "selection_reason": "collaborative frontend app"
+    "selection_reason": "collaborative frontend app",
+    "deploy_difficulty": "简单 — 根目录 Dockerfile + compose 单服务静态前端"
   },
   {
     "full_name": "CorentinTh/it-tools",
@@ -405,7 +418,8 @@
       "reasoning": "IT-Tools publishes official images on both Docker Hub (corentinth/it-tools) and GHCR, and is a single web service deployable with a simple docker run command with no complex dependencies."
     },
     "selection_rank": 14,
-    "selection_reason": "static/self-hosted developer tools frontend"
+    "selection_reason": "static/self-hosted developer tools frontend",
+    "deploy_difficulty": "简单 — 单一 Dockerfile，构建 Vue 静态站由 nginx 托管"
   },
   {
     "full_name": "kamranahmedse/developer-roadmap",
@@ -434,7 +448,8 @@
       "reasoning": "No Dockerfile or official Docker image in repo; however, as a standard Node.js web application (roadmap.sh), containerizing it would be straightforward with minimal dependencies."
     },
     "selection_rank": 15,
-    "selection_reason": "representative deployable documentation site"
+    "selection_reason": "representative deployable documentation site",
+    "deploy_difficulty": "中等 — Astro 静态站 monorepo，仓库无 Dockerfile；需自写 node build + 静态服务器镜像"
   },
   {
     "full_name": "PDFMathTranslate/PDFMathTranslate",
@@ -463,7 +478,8 @@
       "reasoning": "Official Docker image published on Docker Hub (byaidu/pdf2zh) with significant pull volume; single-service architecture but requires backend configuration (API keys and service selection for Google/DeepL/Ollama/OpenAI)."
     },
     "selection_rank": 16,
-    "selection_reason": "AI document translation serving app"
+    "selection_reason": "AI document translation serving app",
+    "deploy_difficulty": "中等 — Dockerfile + 单服务 compose，但 Python ML/PDF 依赖重且需外接翻译 API"
   },
   {
     "full_name": "2noise/ChatTTS",
@@ -492,7 +508,8 @@
       "reasoning": "No official Docker image or Dockerfile exists in the repository; containerization would require handling Python dependencies, HuggingFace model downloads, optional vLLM setup, and GPU/CUDA configuration."
     },
     "selection_rank": 17,
-    "selection_reason": "TTS model serving candidate without Docker support"
+    "selection_reason": "TTS model serving candidate without Docker support",
+    "deploy_difficulty": "复杂 — 无 Dockerfile；HF 模型权重 + GPU/CUDA，仓库是推理库而非可直接暴露的 HTTP 服务"
   },
   {
     "full_name": "Pythagora-io/gpt-pilot",
@@ -521,7 +538,8 @@
       "reasoning": "Project includes a Dockerfile and Docker documentation in the README but no evidence of official image publication on registries; deployment requires LLM API key configuration and optional PostgreSQL setup, plus the project is no longer actively maintained which may impact documentation completeness."
     },
     "selection_rank": 18,
-    "selection_reason": "AI agent tool with Dockerfile"
+    "selection_reason": "AI agent tool with Dockerfile",
+    "deploy_difficulty": "复杂 — Dockerfile 集成 code-server、MongoDB 与多端口开发环境，非最小化应用部署"
   },
   {
     "full_name": "ToolJet/ToolJet",
@@ -550,7 +568,8 @@
       "reasoning": "ToolJet publishes official Docker images (tooljet/try on Docker Hub) with a documented quickstart command, but deployment requires PostgreSQL database setup, persistent volumes, and likely multiple services managed through the included docker-compose configuration."
     },
     "selection_rank": 19,
-    "selection_reason": "self-hosted internal tools platform"
+    "selection_reason": "self-hosted internal tools platform",
+    "deploy_difficulty": "中等 — 官方 tooljet/try 一体化镜像（内嵌 Postgres）；从本仓库源码构建为大型 JS monorepo"
   },
   {
     "full_name": "xuxueli/xxl-job",
@@ -579,6 +598,7 @@
       "reasoning": "The project publishes an official Docker image (xuxueli/xxl-job-admin on Docker Hub) as stated in the README feature list, but deploying requires multiple components (admin center and executors), database configuration, and cluster coordination."
     },
     "selection_rank": 20,
-    "selection_reason": "distributed job scheduling platform"
+    "selection_reason": "distributed job scheduling platform",
+    "deploy_difficulty": "中等 — Java 调度平台：管理端 + MySQL，完整分布式还需独立 executor；官方提供 admin 镜像"
   }
 ]
