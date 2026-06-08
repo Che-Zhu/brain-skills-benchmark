@@ -12,6 +12,7 @@
 - **GitHub token**：注入 Devbox，供 skill 推镜像等
 - **Codex Gateway API key**：Devbox 内 agent 调用（与 Brain UI 同名变量）
 - **技能仓库 URL**：`BRAIN_SANDBOX_SKILLS_GIT`，供 Devbox 内 `npx skills add` 安装
+- **Sealos Template API URL**：`SEALOS_TEMPLATE_API_URL`，benchmark 队列来源（需可访问外网）
 
 ## 快速开始
 
@@ -48,7 +49,7 @@ flowchart LR
   W -->|否| Done[输出 CSV 路径]
 ```
 
-1. 从 `2000-repos/top1000-representative-deployable-apps.json` 读取已筛选的代表性可部署仓库；未设置 `BENCHMARK_LIMIT` 时处理全部条目，设置后只取前 N 个。
+1. 从 `SEALOS_TEMPLATE_API_URL` 拉取 Sealos App Store 已上架 template，过滤出 GitHub 仓库作为队列；未设置 `BENCHMARK_LIMIT` 时处理全部条目，设置后只取前 N 个。
 2. 对每个仓库：创建 Devbox → bootstrap → Gateway turn → **按本仓时间窗拉取 API 用量并追加 CSV 一行** → 删除 Devbox。
 3. 若队列里还有下一项，**等待 2 分钟** 再开始下一个仓库。
 
@@ -62,13 +63,14 @@ Devbox / Gateway 客户端实现见 `src/lib/devbox/` 与 `src/lib/overview-usag
 
 | 变量 | 说明 |
 |------|------|
+| `SEALOS_TEMPLATE_API_URL` | Sealos Template 列表 API（benchmark 队列） |
 | `SEALOS_HOST` | Sealos 集群主机名 |
 | `DEVBOX_TLS_INSECURE` | 自签证书集群时设为 `1` |
 | `DEVBOX_JWT_SIGNING_KEY` 或 `DEVBOX_TOKEN` | Devbox API 认证（二选一） |
 | `GITHUB_TOKEN` | 注入 Devbox，供 skill 推镜像等 |
 | `CODEX_GATEWAY_OPENAI_API_KEY` | Devbox 内 Codex Gateway |
 | `BRAIN_SANDBOX_SKILLS_GIT` | `npx skills add` 的技能仓库 URL |
-| `BENCHMARK_LIMIT` | 可选；本次运行处理的仓库数量（省略则用队列文件中的全部条目） |
+| `BENCHMARK_LIMIT` | 可选；本次运行处理的仓库数量（省略则处理全部 template 队列） |
 
 常用可选项：`BENCHMARK_TURN_TIMEOUT_MS`（turn 超时，默认 30 分钟）、`BENCHMARK_TURN_POLL_MS`、`BENCHMARK_DEVBOX_BOOTSTRAP_TIMEOUT_MS`、`BENCHMARK_DEVBOX_MAX_DURATION_MINUTES` 等，见 `.env.example`。
 
@@ -86,8 +88,8 @@ Devbox / Gateway 客户端实现见 `src/lib/devbox/` 与 `src/lib/overview-usag
 | 列 | 含义 |
 |----|------|
 | `full_name` | `owner/repo` |
-| `category` | 队列 JSON 中的分类 |
-| `deploy_difficulty` | 基于仓库代码审查的难度标注 |
+| `category` | 保留列；Sealos template 队列无此元数据时为空 |
+| `deploy_difficulty` | 保留列；Sealos template 队列无此元数据时为空 |
 | `status` | `success` 或 `failed` |
 | `error` | 失败时的错误信息 |
 | `started_at` / `finished_at` | 本仓处理起止时间（本地时区） |
@@ -116,8 +118,6 @@ BENCHMARK_LIMIT=1 npm run benchmark             # 端到端单仓（含 turn，�
 | 脚本 | 用途 |
 |------|------|
 | `node scripts/fetch-overview-records.mjs` | 拉取 Gateway overview 用量记录（与 CSV 汇总同源） |
-| `node scripts/enrich-benchmark-csv.mjs <csv>` | 为旧版 CSV 补全 `category`、`deploy_difficulty` 列 |
-| `node scripts/patch-queue-deploy-difficulty.mjs` | 修补队列 JSON 中的 `deploy_difficulty` 元数据 |
 
 ## 项目结构
 
@@ -126,7 +126,8 @@ run.mjs              # npm 入口
 src/run.mjs          # 总控循环（队列、间隔、错误恢复）
 src/context.mjs      # 单次运行的共享状态
 src/steps/step-*     # 各步骤（队列、Devbox、skill、CSV、清理）
-src/lib/             # Devbox API、Gateway 客户端、队列加载、CSV 等
-scripts/             # 健康检查、冒烟、CSV/队列工具
-2000-repos/          # 仓库列表与分析 JSON
+src/lib/             # Devbox API、Gateway 客户端、env、CSV 等
+src/steps/step-1-load-queue/  # 从 Sealos Template API 加载 benchmark 队列
+scripts/             # 健康检查、冒烟、用量查询
+2000-repos/          # 历史仓库分析 JSON（非 benchmark 队列）
 ```
