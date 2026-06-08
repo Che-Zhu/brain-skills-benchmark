@@ -1,6 +1,6 @@
 import { createContext } from "./context.mjs";
-import { loadEnvFile } from "./lib/load-env.mjs";
-import { run as loadQueue } from "./steps/step-1-load-queue/load-queue.mjs";
+import { loadEnvFile, validateBenchmarkEnv } from "./lib/load-env.mjs";
+import { run as loadQueue } from "./steps/step-1-load-queue/index.mjs";
 import { run as markStarted } from "./steps/step-2-1-mark-started/mark-started.mjs";
 import { run as createDevbox } from "./steps/step-2-2-create-devbox/create-devbox.mjs";
 import { run as runSkill } from "./steps/step-2-3-run-skill/run-skill.mjs";
@@ -23,6 +23,7 @@ function sleep(ms) {
 
 export async function main() {
   loadEnvFile();
+  validateBenchmarkEnv();
   const ctx = createContext();
   await loadQueue(ctx);
 
