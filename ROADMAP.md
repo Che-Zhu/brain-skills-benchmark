@@ -11,6 +11,8 @@ brain-skills-benchmark 当前能在 Sealos Devbox 上批量跑 sandbox skill 并
 
 ## 测试集与 Skill 质量
 
+> **下一步：** 「根据 transcript 优化 skill 流程」。
+
 - [x] **改用 Sealos Template 列表作为 benchmark 测试集**
   - 运行时从 `SEALOS_TEMPLATE_API_URL` 拉取用例（见 `src/steps/step-1-load-queue/`）
   - 仅保留 `gitRepo` 为 GitHub 的 template，映射为 `{ full_name }` 供 Devbox 链路使用
