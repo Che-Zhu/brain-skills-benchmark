@@ -6,14 +6,11 @@ import { run as createDevbox } from "./steps/step-2-2-create-devbox/create-devbo
 import { run as runSkill } from "./steps/step-2-3-run-skill/run-skill.mjs";
 import { run as finalizeOutcome } from "./steps/step-2-4-finalize-outcome/finalize-outcome.mjs";
 import { run as appendCsvRow } from "./steps/step-2-5-append-csv-row/append-csv-row.mjs";
+import { run as locateTemplateYaml } from "./steps/step-2-5-locate-template-yaml/locate-template-yaml.mjs";
+import { run as dryRunTemplate } from "./steps/step-2-6-dryrun-template/dryrun-template.mjs";
 import { run as deleteDevbox } from "./steps/step-2-6-delete-devbox/delete-devbox.mjs";
 
-const REPO_BODY_STEPS = [
-  createDevbox,
-  runSkill,
-  finalizeOutcome,
-  appendCsvRow,
-];
+const REPO_BODY_STEPS = [createDevbox, runSkill, finalizeOutcome];
 
 const REPO_INTERVAL_MS = 2 * 60 * 1000;
 
@@ -42,11 +39,31 @@ export async function main() {
         ctx.error = error instanceof Error ? error.message : String(error);
       }
       await finalizeOutcome(ctx);
-      await appendCsvRow(ctx);
       console.error(
         `[failed] ${ctx.current.full_name}: ${ctx.error ?? "unknown error"}`,
       );
     } finally {
+      try {
+        await locateTemplateYaml(ctx);
+      } catch (error) {
+        console.error(
+          `[template] locate step error: ${error instanceof Error ? error.message : error}`,
+        );
+      }
+      try {
+        await dryRunTemplate(ctx);
+      } catch (error) {
+        console.error(
+          `[template-dryrun] step error: ${error instanceof Error ? error.message : error}`,
+        );
+      }
+      try {
+        await appendCsvRow(ctx);
+      } catch (error) {
+        console.error(
+          `[report] append CSV failed: ${error instanceof Error ? error.message : error}`,
+        );
+      }
       try {
         await deleteDevbox(ctx);
       } catch (error) {

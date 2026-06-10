@@ -34,6 +34,14 @@ export function createContext() {
     status: null,
     error: null,
     cleanupError: null,
+    templateYamlPath: null,
+    templateYamlLocalPath: null,
+    templateYamlContent: null,
+    templateYaml: null,
+    templateYamlError: null,
+    templateDryRun: null,
+    templateDryRunStatus: null,
+    templateDryRunError: null,
     csvPath,
   };
 }
