@@ -6,7 +6,9 @@
     "benchmark": "node run.mjs",
     "devbox:health": "node scripts/devbox-health.mjs",
     "devbox:health:auth": "node scripts/devbox-health.mjs --auth",
-    "devbox:smoke": "node scripts/devbox-smoke-one-repo.mjs"
+    "devbox:smoke": "node scripts/devbox-smoke-one-repo.mjs",
+    "devbox:locate-template-smoke": "node scripts/devbox-locate-template-smoke.mjs",
+    "template:dryrun": "node scripts/template-dryrun-from-file.mjs"
   },
   "dependencies": {
     "jose": "^6.0.11"

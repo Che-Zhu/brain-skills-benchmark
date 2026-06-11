@@ -7,11 +7,25 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function getRunningTimeoutMs() {
+  const raw = process.env.BENCHMARK_DEVBOX_RUNNING_TIMEOUT_MS?.trim();
+  if (!raw) {
+    return DEFAULT_TIMEOUT_MS;
+  }
+  const ms = Number.parseInt(raw, 10);
+  if (!Number.isFinite(ms) || ms < 1) {
+    throw new Error(
+      "BENCHMARK_DEVBOX_RUNNING_TIMEOUT_MS must be a positive integer",
+    );
+  }
+  return ms;
+}
+
 /**
  * Wait until Devbox phase is Running; resume if paused/stopped when API allows.
  */
 export async function waitForRunningDevbox(name, options = {}) {
-  const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+  const timeoutMs = options.timeoutMs ?? getRunningTimeoutMs();
   const pollMs = options.pollMs ?? DEFAULT_POLL_MS;
   const startedAt = Date.now();
 

@@ -41,6 +41,9 @@ export async function run(ctx) {
     apiRequests: usage.apiRequests,
     apiTokens: usage.apiTokens,
     apiCostUsd: usage.apiCostUsd,
+    templateYamlPath: ctx.templateYamlLocalPath,
+    templateDryRunStatus: ctx.templateDryRunStatus,
+    templateDryRunError: ctx.templateDryRunError,
   });
 
   appendFileSync(ctx.csvPath, `${row}\n`);

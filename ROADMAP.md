@@ -4,7 +4,7 @@ brain-skills-benchmark 当前能在 Sealos Devbox 上批量跑 sandbox skill 并
 
 ## P0 — Sealos 集成
 
-- [ ] **确保 skill 生成的 templates 可被 Sealos consume**
+- [x] **确保 skill 生成的 templates 可被 Sealos consume**
   - 校验 skill 产出的 template 格式、字段与 Sealos 消费端要求一致（非仅「文件生成成功」）
   - 与 template 导入 / 部署链路联调，覆盖简单 / 中等 / 复杂用例
   - 当前最高优先级：skill 的价值最终要体现在 Sealos 能消费并部署

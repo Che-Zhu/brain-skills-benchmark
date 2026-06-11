@@ -12,6 +12,31 @@ function parseBenchmarkLimit(env = process.env) {
   return limit;
 }
 
+function applyTargetFilter(queue, env = process.env) {
+  const repo = env.BENCHMARK_REPO?.trim();
+  const templateName = env.BENCHMARK_TEMPLATE_NAME?.trim()?.toLowerCase();
+  if (!repo && !templateName) return queue;
+
+  const filtered = queue.filter((item) => {
+    if (repo && item.full_name !== repo) return false;
+    if (templateName && item.template_name?.toLowerCase() !== templateName) {
+      return false;
+    }
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    throw new Error(
+      `BENCHMARK_REPO/BENCHMARK_TEMPLATE_NAME matched no queue entry (repo=${repo ?? ""}, template=${templateName ?? ""})`,
+    );
+  }
+
+  console.info(
+    `[queue] target filter → ${filtered.map((item) => item.full_name).join(", ")}`,
+  );
+  return filtered;
+}
+
 function githubFullName(gitRepo) {
   try {
     const url = new URL(String(gitRepo).trim());
@@ -38,7 +63,10 @@ export async function loadTemplatesFromSealos({ limit = parseBenchmarkLimit() } 
     const full_name = githubFullName(t.spec?.gitRepo);
     if (!full_name || seen.has(full_name)) continue;
     seen.add(full_name);
-    queue.push({ full_name });
+    queue.push({
+      full_name,
+      template_name: t.metadata?.name ?? null,
+    });
   }
 
   console.info(
@@ -46,5 +74,6 @@ export async function loadTemplatesFromSealos({ limit = parseBenchmarkLimit() } 
   );
   if (queue.length === 0) throw new Error("empty queue after filter");
 
-  return limit === undefined ? queue : queue.slice(0, limit);
+  const targeted = applyTargetFilter(queue);
+  return limit === undefined ? targeted : targeted.slice(0, limit);
 }

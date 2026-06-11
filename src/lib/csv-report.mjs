@@ -4,7 +4,7 @@ import {
 } from "./local-time.mjs";
 
 export const CSV_HEADER =
-  "full_name,category,deploy_difficulty,status,error,started_at,finished_at,runtime_name,gateway_session_id,duration,api_requests,api_tokens,api_cost_usd\n";
+  "full_name,category,deploy_difficulty,status,error,started_at,finished_at,runtime_name,gateway_session_id,duration,api_requests,api_tokens,api_cost_usd,template_yaml_path,template_dryrun_status,template_dryrun_error\n";
 
 export function escapeCsv(value) {
   const s = String(value ?? "");
@@ -30,6 +30,9 @@ export function formatCsvRow(row) {
     row.apiRequests,
     row.apiTokens,
     row.apiCostUsd.toFixed(6),
+    escapeCsv(row.templateYamlPath),
+    escapeCsv(row.templateDryRunStatus),
+    escapeCsv(row.templateDryRunError),
   ].join(",");
 }
 

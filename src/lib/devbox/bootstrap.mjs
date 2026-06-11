@@ -209,6 +209,44 @@ export function buildVerifyWorkspaceScript() {
   ].join("\n");
 }
 
+export async function execWorkspaceScript(
+  runtimeName,
+  script,
+  { timeoutSeconds = 120, timeoutMs } = {},
+) {
+  const startedAt = Date.now();
+  const deadlineMs =
+    startedAt +
+    (timeoutMs ??
+      Number.parseInt(
+        process.env.BENCHMARK_DEVBOX_BOOTSTRAP_TIMEOUT_MS ||
+          String(DEFAULT_BOOTSTRAP_READY_TIMEOUT_MS),
+        10,
+      ));
+
+  while (true) {
+    if (Date.now() >= deadlineMs) {
+      throw new Error(
+        `Timed out running workspace exec on Devbox ${runtimeName}`,
+      );
+    }
+
+    try {
+      await waitForDevboxExecReady(runtimeName, deadlineMs);
+      return await execDevbox(runtimeName, {
+        command: ["sh", "-lc", script],
+        timeoutSeconds,
+      });
+    } catch (error) {
+      if (isRetryableExecError(error)) {
+        await sleep(BOOTSTRAP_READY_POLL_MS);
+        continue;
+      }
+      throw error;
+    }
+  }
+}
+
 export async function verifyWorkspace(runtimeName, options = {}) {
   const timeoutMs =
     options.timeoutMs ??
