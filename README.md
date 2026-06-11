@@ -138,5 +138,4 @@ src/steps/step-*     # 各步骤（队列、Devbox、skill、CSV、清理）
 src/lib/             # Devbox API、Gateway 客户端、env、CSV 等
 src/steps/step-1-load-queue/  # 从 Sealos Template API 加载 benchmark 队列
 scripts/             # 健康检查、冒烟、用量查询
-2000-repos/          # 历史仓库分析 JSON（非 benchmark 队列）
 ```
