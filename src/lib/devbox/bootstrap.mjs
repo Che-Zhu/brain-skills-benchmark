@@ -15,6 +15,17 @@ function shellEscape(value) {
   return `'${value.replace(/'/g, `'\\''`)}'`;
 }
 
+/** GitHub /tree/branch URLs with slashes must use --ref; skills CLI splits on /. */
+export function buildSkillsAddCommand(skillsGit) {
+  const url = skillsGit.trim();
+  const treeMatch = url.match(/^(https:\/\/github\.com\/[^/]+\/[^/]+)\/tree\/(.+)$/);
+  if (treeMatch) {
+    const [, repo, ref] = treeMatch;
+    return `npx --yes skills add ${shellEscape(repo)} --ref ${shellEscape(ref)} -y`;
+  }
+  return `npx --yes skills add ${shellEscape(url)} -y`;
+}
+
 /** Shell lines that set workspace_dir (same logic as ShipRepo bootstrap). */
 export function workspaceDirScriptLines() {
   return [
@@ -45,7 +56,7 @@ export function workspaceOwnershipFixScriptLines() {
 
 export function buildBootstrapScript(repoUrl, skillsGit) {
   const escapedRepo = shellEscape(repoUrl);
-  const skillsCommand = `npx --yes skills add ${shellEscape(skillsGit)} -y`;
+  const skillsCommand = buildSkillsAddCommand(skillsGit);
 
   return [
     "set -e",

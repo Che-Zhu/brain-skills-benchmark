@@ -11,7 +11,7 @@
 - **Devbox API 凭证**：`DEVBOX_JWT_SIGNING_KEY` 或 `DEVBOX_TOKEN`（二选一）
 - **GitHub token**：注入 Devbox，供 skill 推镜像等
 - **Codex Gateway API key**：Devbox 内 agent 调用（与 Brain UI 同名变量）
-- **技能仓库 URL**：`BRAIN_SANDBOX_SKILLS_GIT`，供 Devbox 内 `npx skills add` 安装
+- **技能仓库 URL**：`BRAIN_SANDBOX_SKILLS_GIT`，供 Devbox 内 `npx skills add` 安装（本 benchmark 使用 [zjy365/sealos-skills `sandbox-skill-lite`](https://github.com/zjy365/sealos-skills/tree/sandbox-skill-lite)）
 - **Sealos Template API URL**：`SEALOS_TEMPLATE_API_URL`，benchmark 队列来源（需可访问外网）
 
 ## 快速开始
@@ -73,7 +73,7 @@ Devbox / Gateway 客户端实现见 `src/lib/devbox/` 与 `src/lib/overview-usag
 | `DEVBOX_JWT_SIGNING_KEY` 或 `DEVBOX_TOKEN` | Devbox API 认证（二选一） |
 | `GITHUB_TOKEN` | 注入 Devbox，供 skill 推镜像等 |
 | `CODEX_GATEWAY_OPENAI_API_KEY` | Devbox 内 Codex Gateway |
-| `BRAIN_SANDBOX_SKILLS_GIT` | `npx skills add` 的技能仓库 URL |
+| `BRAIN_SANDBOX_SKILLS_GIT` | `npx skills add` 的技能仓库 URL；默认 `https://github.com/zjy365/sealos-skills/tree/sandbox-skill-lite` |
 | `BENCHMARK_LIMIT` | 可选；本次运行处理的仓库数量（省略则处理全部 template 队列） |
 
 常用可选项：`BENCHMARK_TURN_TIMEOUT_MS`（turn 超时，默认 30 分钟）、`BENCHMARK_TURN_POLL_MS`、`BENCHMARK_DEVBOX_BOOTSTRAP_TIMEOUT_MS`、`BENCHMARK_DEVBOX_MAX_DURATION_MINUTES` 等，见 `.env.example`。
