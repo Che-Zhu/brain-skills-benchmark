@@ -15,13 +15,13 @@ function shellEscape(value) {
   return `'${value.replace(/'/g, `'\\''`)}'`;
 }
 
-/** GitHub /tree/branch URLs with slashes must use --ref; skills CLI splits on /. */
+/** GitHub /tree/ref URLs must use fragment refs; the skills CLI has no --ref option. */
 export function buildSkillsAddCommand(skillsGit) {
   const url = skillsGit.trim();
   const treeMatch = url.match(/^(https:\/\/github\.com\/[^/]+\/[^/]+)\/tree\/(.+)$/);
   if (treeMatch) {
     const [, repo, ref] = treeMatch;
-    return `npx --yes skills add ${shellEscape(repo)} --ref ${shellEscape(ref)} -y`;
+    return `npx --yes skills add ${shellEscape(`${repo}#${ref}`)} -y`;
   }
   return `npx --yes skills add ${shellEscape(url)} -y`;
 }
