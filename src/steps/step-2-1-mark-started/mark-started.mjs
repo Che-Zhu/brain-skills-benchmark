@@ -17,4 +17,12 @@ export async function run(ctx) {
   ctx.gatewaySelectedModel = null;
   ctx.workspaceReady = false;
   ctx.cleanupError = null;
+  ctx.templateYamlPath = null;
+  ctx.templateYamlLocalPath = null;
+  ctx.templateYamlContent = null;
+  ctx.templateYaml = null;
+  ctx.templateYamlError = null;
+  ctx.templateDryRun = null;
+  ctx.templateDryRunStatus = null;
+  ctx.templateDryRunError = null;
 }

@@ -1,6 +1,7 @@
 import { getCodexGatewaySessionState, sendCodexGatewayTurn } from "./client.mjs";
 import {
   buildTurnFailureMessage,
+  isGatewayModelCapacityFailure,
   isTurnSuccess,
   mapTurnToBenchmarkStatus,
 } from "./completion.mjs";
@@ -14,6 +15,8 @@ import {
 
 const DEFAULT_POLL_MS = 10_000;
 const DEFAULT_TURN_TIMEOUT_MS = 30 * 60 * 1000;
+const DEFAULT_CAPACITY_RETRY_LIMIT = 2;
+const DEFAULT_CAPACITY_RETRY_DELAY_MS = 60_000;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -39,6 +42,34 @@ function getTurnPollMs() {
   const ms = Number.parseInt(raw, 10);
   if (!Number.isFinite(ms) || ms < 1) {
     throw new Error("BENCHMARK_TURN_POLL_MS must be a positive integer");
+  }
+  return ms;
+}
+
+function getCapacityRetryLimit() {
+  const raw = process.env.BENCHMARK_GATEWAY_CAPACITY_RETRIES?.trim();
+  if (!raw) {
+    return DEFAULT_CAPACITY_RETRY_LIMIT;
+  }
+  const limit = Number.parseInt(raw, 10);
+  if (!Number.isFinite(limit) || limit < 0) {
+    throw new Error(
+      "BENCHMARK_GATEWAY_CAPACITY_RETRIES must be a non-negative integer",
+    );
+  }
+  return limit;
+}
+
+function getCapacityRetryDelayMs() {
+  const raw = process.env.BENCHMARK_GATEWAY_CAPACITY_RETRY_DELAY_MS?.trim();
+  if (!raw) {
+    return DEFAULT_CAPACITY_RETRY_DELAY_MS;
+  }
+  const ms = Number.parseInt(raw, 10);
+  if (!Number.isFinite(ms) || ms < 1) {
+    throw new Error(
+      "BENCHMARK_GATEWAY_CAPACITY_RETRY_DELAY_MS must be a positive integer",
+    );
   }
   return ms;
 }
@@ -102,58 +133,85 @@ export async function runSkillTurn(ctx) {
   const gatewayUrl = ctx.gatewayUrl;
   const authToken = ctx.gatewayAuthToken ?? null;
   const fullName = ctx.current.full_name;
-
-  console.info(`[gateway] session for ${fullName}`);
-  const session = await ensureGatewaySession(gatewayUrl, authToken);
-  ctx.gatewaySessionId = session.sessionId;
-  console.info(`[gateway] session ${ctx.gatewaySessionId}`);
-
   const prompt = buildBenchmarkSkillPrompt(ctx);
   const pollMs = getTurnPollMs();
-  console.info(`[gateway] turn start ${fullName} (poll every ${pollMs / 1000}s)`);
-  await sendCodexGatewayTurn(
-    gatewayUrl,
-    session.sessionId,
-    { prompt },
-    authToken,
-  );
-
   const timeoutMs = getTurnTimeoutMs();
-  const finalSession = await waitForTurnTerminal(
-    gatewayUrl,
-    session.sessionId,
-    authToken,
-    timeoutMs,
-    pollMs,
-  );
+  const capacityRetryLimit = getCapacityRetryLimit();
+  const capacityRetryDelayMs = getCapacityRetryDelayMs();
+  let finalSession = null;
+  let capacityFailure = false;
 
-  const lastTurnStatus = finalSession.state?.lastTurnStatus ?? null;
-  console.info(
-    `[gateway] turn done ${fullName} lastTurnStatus=${lastTurnStatus}`,
-  );
-
-  logGatewayTranscript(finalSession.state?.transcript, {
-    label: `${fullName} ${lastTurnStatus ?? "unknown"}`,
-  });
-
-  if (finalSession.state?.recentEvents?.length) {
-    console.info(
-      `[gateway] recentEvents (${finalSession.state.recentEvents.length}):`,
-    );
-    for (const event of finalSession.state.recentEvents.slice(-10)) {
+  for (let attempt = 0; attempt <= capacityRetryLimit; attempt += 1) {
+    if (attempt > 0) {
       console.info(
-        `[gateway]   ${event.at ?? ""} ${event.type ?? ""} ${event.textPreview ?? ""}`.trim(),
+        `[gateway] retrying ${fullName} after model capacity failure (${attempt}/${capacityRetryLimit})`,
       );
     }
+
+    console.info(`[gateway] session for ${fullName}`);
+    const session = await ensureGatewaySession(gatewayUrl, authToken);
+    ctx.gatewaySessionId = session.sessionId;
+    console.info(`[gateway] session ${ctx.gatewaySessionId}`);
+
+    console.info(
+      `[gateway] turn start ${fullName} (poll every ${pollMs / 1000}s)`,
+    );
+    await sendCodexGatewayTurn(
+      gatewayUrl,
+      session.sessionId,
+      { prompt },
+      authToken,
+    );
+
+    finalSession = await waitForTurnTerminal(
+      gatewayUrl,
+      session.sessionId,
+      authToken,
+      timeoutMs,
+      pollMs,
+    );
+
+    const lastTurnStatus = finalSession.state?.lastTurnStatus ?? null;
+    console.info(
+      `[gateway] turn done ${fullName} lastTurnStatus=${lastTurnStatus}`,
+    );
+
+    logGatewayTranscript(finalSession.state?.transcript, {
+      label: `${fullName} ${lastTurnStatus ?? "unknown"}`,
+    });
+
+    if (finalSession.state?.recentEvents?.length) {
+      console.info(
+        `[gateway] recentEvents (${finalSession.state.recentEvents.length}):`,
+      );
+      for (const event of finalSession.state.recentEvents.slice(-10)) {
+        console.info(
+          `[gateway]   ${event.at ?? ""} ${event.type ?? ""} ${event.textPreview ?? ""}`.trim(),
+        );
+      }
+    }
+
+    capacityFailure =
+      !isTurnSuccess(lastTurnStatus) &&
+      isGatewayModelCapacityFailure(finalSession.state);
+    if (!capacityFailure || attempt === capacityRetryLimit) {
+      break;
+    }
+    await sleep(capacityRetryDelayMs);
   }
 
+  const lastTurnStatus = finalSession?.state?.lastTurnStatus ?? null;
   ctx.gatewayLastTurnStatus = lastTurnStatus;
-  ctx.gatewayThreadId = finalSession.state?.threadId ?? null;
-  ctx.gatewaySelectedModel = finalSession.state?.selectedModel ?? null;
+  ctx.gatewayThreadId = finalSession?.state?.threadId ?? null;
+  ctx.gatewaySelectedModel = finalSession?.state?.selectedModel ?? null;
 
-  ctx.status = mapTurnToBenchmarkStatus(lastTurnStatus);
+  ctx.status = mapTurnToBenchmarkStatus(lastTurnStatus, {
+    gatewayModelCapacityFailure: capacityFailure,
+  });
   if (isTurnSuccess(lastTurnStatus)) {
     ctx.error = null;
+  } else if (capacityFailure) {
+    ctx.error = `Codex gateway model capacity failure after ${capacityRetryLimit + 1} attempt(s)`;
   } else {
     ctx.error = buildTurnFailureMessage(lastTurnStatus);
   }
