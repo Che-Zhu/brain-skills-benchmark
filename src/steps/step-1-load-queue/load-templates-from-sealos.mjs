@@ -1,6 +1,6 @@
 import { requireEnv } from "../../lib/load-env.mjs";
 
-function parseBenchmarkLimit(env = process.env) {
+function parseBenchmarkLimit(env) {
   const raw = env.BENCHMARK_LIMIT;
   if (raw === undefined || raw === "") return undefined;
   const limit = Number.parseInt(raw, 10);
@@ -10,6 +10,30 @@ function parseBenchmarkLimit(env = process.env) {
     );
   }
   return limit;
+}
+
+function parseBenchmarkOffset(env) {
+  const raw = env.BENCHMARK_OFFSET;
+  if (raw === undefined || raw === "") return 0;
+  const offset = Number.parseInt(raw, 10);
+  if (!Number.isFinite(offset) || offset < 0) {
+    throw new Error(
+      `Invalid BENCHMARK_OFFSET "${raw}" (expected a non-negative integer)`,
+    );
+  }
+  return offset;
+}
+
+function directRepoEnabled(env) {
+  return env.BENCHMARK_ALLOW_DIRECT_REPO === "1";
+}
+
+function validateRepoFullName(fullName) {
+  if (!/^[^/\s]+\/[^/\s]+$/.test(fullName)) {
+    throw new Error(
+      `Invalid BENCHMARK_REPO "${fullName}" (expected owner/repo)`,
+    );
+  }
 }
 
 function applyTargetFilter(queue, env = process.env) {
@@ -26,6 +50,20 @@ function applyTargetFilter(queue, env = process.env) {
   });
 
   if (filtered.length === 0) {
+    if (repo && !templateName && directRepoEnabled(env)) {
+      validateRepoFullName(repo);
+      console.info(
+        `[queue] target filter → ${repo} (direct repo fallback, not in Sealos template queue)`,
+      );
+      return [
+        {
+          full_name: repo,
+          template_name: null,
+          queue_source: "direct",
+        },
+      ];
+    }
+
     throw new Error(
       `BENCHMARK_REPO/BENCHMARK_TEMPLATE_NAME matched no queue entry (repo=${repo ?? ""}, template=${templateName ?? ""})`,
     );
@@ -49,8 +87,12 @@ function githubFullName(gitRepo) {
   }
 }
 
-export async function loadTemplatesFromSealos({ limit = parseBenchmarkLimit() } = {}) {
-  const url = requireEnv("SEALOS_TEMPLATE_API_URL");
+export async function loadTemplatesFromSealos({
+  env = process.env,
+  limit = parseBenchmarkLimit(env),
+  offset = parseBenchmarkOffset(env),
+} = {}) {
+  const url = requireEnv("SEALOS_TEMPLATE_API_URL", env);
   const res = await fetch(url);
   if (!res.ok) throw new Error(`template API HTTP ${res.status}`);
 
@@ -74,6 +116,13 @@ export async function loadTemplatesFromSealos({ limit = parseBenchmarkLimit() } 
   );
   if (queue.length === 0) throw new Error("empty queue after filter");
 
-  const targeted = applyTargetFilter(queue);
-  return limit === undefined ? targeted : targeted.slice(0, limit);
+  const targeted = applyTargetFilter(queue, env);
+  const windowed = targeted.slice(offset);
+  const limited = limit === undefined ? windowed : windowed.slice(0, limit);
+  if (offset > 0 || limit !== undefined) {
+    console.info(
+      `[queue] window offset=${offset} limit=${limit ?? "all"} → ${limited.length} repos`,
+    );
+  }
+  return limited;
 }
